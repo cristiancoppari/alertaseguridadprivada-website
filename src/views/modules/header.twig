@@ -1,0 +1,33 @@
+<header class="header fixed-top">
+  <div class="header__top">
+    <div class="container">
+      {% for socialNetwork in header.socialNetworks %}
+      <div class="icon-container">
+        <a href="{{ socialNetwork.link }}">
+          <img src="{{ socialNetwork.icon }}" alt="{{ socialNetwork.altText }}">
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="{{ header.logo.link }}">
+        <img src="{{ header.logo.img }}" alt="{{ header.logo.altText }}">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          {% for navLink in header.navLinks %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ navLink.link }}">{{ navLink.label }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
