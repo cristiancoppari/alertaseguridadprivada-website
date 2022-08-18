@@ -4,34 +4,11 @@
 
   {% include "./modules/header.twig" %}
 
-  <section class="hero">
-    <img src="/images/hero-home.png" alt="">
-    <div class="title-cta-wrapper">
-      <div class="title-cta-content container">
-        <h1>LA MEJOR SOLUCIÓN <br> EN <strong>VIGILANCIA.</strong></h1>
-        
-        <button class="alertas-btn-primary">IR A SERVICIOS</button>
-      </div>
-    </div>
-  </section>
+  {% import "./modules/hero.twig" as heroUtils %}
+  {{ heroUtils.heroBanner(hero) }}
 
-  <section class="calidad-seguridad-compromiso container">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="content-right">
-          <div class="content-wrapper">
-            <h2>Calidad <br>Seguridad <br>Compromiso</h2>
-            <p>Alertas Seguridad Privada. Experiencia, responsabilidad y confiabilidad, puesta al servicio de su seguridad.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="image-wrapper">
-          <img src="/images/services.png" alt="">
-        </div>
-      </div>
-    </div>
-  </section>
+  {% import "./modules/text-image.twig" as textImageUtils %}
+  {{ textImageUtils.textImage(calidadSeguridadCompromiso) }}
 
   <section class="porque-elegirnos">
     <h2>¿Por qué nos eligen?</h2>
@@ -69,60 +46,9 @@
     </div>
   </section>
 
-  <section class="estamos-para-ayudarte container">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="image-wrapper">
-          <img src="/images/security-guard.png" alt="">
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="content-left">
-          <div class="content-wrapper">
-            <h2>Calidad <br>Seguridad <br>Compromiso</h2>
-            <p>Alertas Seguridad Privada. Experiencia, responsabilidad y confiabilidad, puesta al servicio de su seguridad.</p>
-            <button class="alertas-btn-primary">CONTACTAR</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  {{ textImageUtils.imageText(estamosParaAyudarte) }}
 
-  <section class="trabajar-en-alertas">
-    <div class="content-wrapper">
-      <img src="/images/logo-alertas-2.png" alt="">
-      <h3>¿Querés trabajar con Alertas Seguridad Privada?</h3>
-      <p>Completá el formulario de R.R.H.H.</p>
-      <button class="alertas-btn-secondary">CONTACTAR</button>
-    </div>
-  </section>
+  {% include "./modules/trabajar-en-alertas.twig" %}
 
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="icon-wrapper">
-            <img src="/images/logo-alertas.png" alt="">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <p>Buenos Aires, Argentina</p>
-          <p>+54 9 11 3581-5718 | +54 9 11 3580-5780</p>
-          <p>Copyright © 2022 Alertas Seguridad Privada - All Rights Reserved.</p>
-        </div>
-        <div class="col-md-4">
-          <div class="redes-sociales">
-            <div class="redes-sociales-wrapper">
-              <a href="#">
-                <img src="/images/icon-facebook.svg" alt="Alertas Seguridad Privada - Facebook">
-              </a>
-              <a href="#">
-                <img src="/images/icon-linkedin.svg" alt="Alertas Seguridad Privada - LinkedIn">
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+  {% include "./modules/footer.twig" %}
 {% endblock %}

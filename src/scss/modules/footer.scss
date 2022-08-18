@@ -1,0 +1,56 @@
+footer {
+  background-color: $gray;
+  color: $white;
+
+  padding: 4rem 0;
+
+  .icon-wrapper {
+    img {
+      display: block;
+      width: 5rem;
+
+      margin: 0 auto 1rem auto;
+
+      @include media-breakpoint-up(md) {
+        margin: 0;
+      }
+    }
+  }
+
+  a {
+    color: transparent;
+  }
+
+  .redes-sociales {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    .redes-sociales-wrapper {
+      display: flex;
+      justify-items: center;
+      align-items: center;
+      gap: 1rem;
+
+      // margin: 0 auto;
+    }
+
+    img {
+      display: block;
+      width: 1rem;
+    }
+  }
+
+  p {
+    font-size: 14px;
+
+    color: $white;
+
+    text-align: center;
+
+    @include media-breakpoint-up(md) {
+      text-align: left;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{% macro heroBanner(hero) %}
+  <section class="hero">
+    <picture>
+      <source media="(min-width: 1920px)" srcset="{{ hero.image.desktopXL }}">
+      <source media="(min-width: 1200px)" srcset="{{ hero.image.desktop }}">
+      <source media="(min-width: 768px)" srcset="{{ hero.image.tablet }}">
+      <img src="{{ hero.image.mobile }}" alt="Alertas Seguridad Privada">
+    </picture>
+    {% if hero.title %}
+    <div class="title-cta-wrapper">
+      <div class="title-cta-content container">
+        <h1>{{ hero.title }}</h1>
+        {# <h1>LA MEJOR SOLUCIÓN <br> EN <strong>VIGILANCIA.</strong></h1> #}
+        
+        {% if hero.cta %}
+        <a class="alertas-btn-primary" href="{{ hero.cta.link }}">{{ hero.cta.label }}</a>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+  </section>
+{% endmacro %}

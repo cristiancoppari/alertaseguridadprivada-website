@@ -1,0 +1,49 @@
+{% macro textImage(content) %}
+  <section class="text-image container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="content-right">
+          <div class="content-wrapper">
+            <h2>{{ content.title }}</h2>
+
+            {% for text in content.text %}
+            <p>{{ text }}</p>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="image-wrapper">
+          <img src="{{ content.image }}" alt="Alertas Seguridad Privada">
+        </div>
+      </div>
+    </div>
+  </section>
+{% endmacro %}
+
+{% macro imageText(content) %}
+  <section class="image-text container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="image-wrapper">
+          <img src="{{ content.image }}" alt="Alertas Seguridad Privada">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="content-left">
+          <div class="content-wrapper">
+            <h2>{{ content.title }}</h2>
+            
+            {% for text in content.text %}
+            <p>{{ text }}</p>
+            {% endfor %}
+
+            {% if content.cta %}
+            <a class="alertas-btn-primary" href="{{ content.cta.link }}">{{ content.cta.label }}</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endmacro %}
