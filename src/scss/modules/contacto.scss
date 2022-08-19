@@ -1,0 +1,37 @@
+.contacto {
+  margin-top: $margin-top;
+
+  h1 {
+    @include title-decoration;
+  }
+
+  strong {
+    font-weight: 700;
+  }
+
+  form {
+    width: 90%;
+
+    box-shadow: 0px 2px 18px rgba($black, 0.4);
+
+    border-radius: 1rem;
+
+    padding: 2rem;
+    margin: 4rem auto 2rem auto;
+
+    .form-label {
+      font-weight: 700;
+
+      .required {
+        color: red;
+      }
+    }
+
+    .form-control,
+    .form-select {
+      background-color: rgba($gray, 0.1);
+
+      border: none;
+    }
+  }
+}

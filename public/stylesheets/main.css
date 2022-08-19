@@ -11283,7 +11283,8 @@ textarea.form-control-lg {
   }
 }
 section:not(.hero) {
-  padding: 4rem 0;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
 h1, .h1,
@@ -11635,5 +11636,38 @@ footer p {
   footer p {
     text-align: left;
   }
+}
+
+.contacto {
+  margin-top: 8rem;
+}
+.contacto h1::after, .contacto .h1::after {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 25%;
+  margin: 1rem 0;
+  background-color: #3282bd;
+}
+.contacto strong {
+  font-weight: 700;
+}
+.contacto form {
+  width: 90%;
+  box-shadow: 0px 2px 18px rgba(0, 0, 0, 0.4);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: 4rem auto 2rem auto;
+}
+.contacto form .form-label {
+  font-weight: 700;
+}
+.contacto form .form-label .required {
+  color: red;
+}
+.contacto form .form-control,
+.contacto form .form-select {
+  background-color: rgba(55, 56, 58, 0.1);
+  border: none;
 }
 /*# sourceMappingURL=main.css.map */
