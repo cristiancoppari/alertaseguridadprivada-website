@@ -2,9 +2,11 @@
   position: relative;
   width: 100vw;
 
+  margin-top: 9rem;
+
   img {
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 9rem);
     object-fit: cover;
   }
 
