@@ -6,8 +6,11 @@
 
   img {
     width: 100%;
-    height: calc(100vh - 9rem);
     object-fit: cover;
+
+    @include media-breakpoint-up(lg) {
+      height: calc(100vh - 9rem);
+    }
   }
 
   .title-cta-wrapper {

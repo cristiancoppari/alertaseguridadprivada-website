@@ -11,10 +11,10 @@ const indexData = {
     title: "LA MEJOR SOLUCIÓN <br> EN <strong>VIGILANCIA.</strong>",
 
     image: {
-      mobile: "/images/hero-home.png",
-      tablet: "/images/hero-home.png",
-      desktop: "/images/hero-home.png",
-      desktopXL: "/images/hero-home.png",
+      mobile: "/images/hero-nosotros-mobile.jpg",
+      tablet: "/images/hero-nosotros-mobile.jpg",
+      desktop: "/images/hero-nosotros-desktop.jpg",
+      desktopXL: "/images/hero-nosotros-desktopxl.jpg",
     },
 
     cta: {

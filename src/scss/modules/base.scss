@@ -3,8 +3,24 @@ section:not(.hero) {
   padding-bottom: 4rem;
 }
 
-// section:first-child {
-//   margin-top: 8rem;
+.alertas-background {
+  background: url("/images/fondo-nosotros.jpg");
+  background-position: center;
+  background-size: cover;
+
+  h2,
+  p {
+    color: $white;
+  }
+}
+
+// .alertas-background {
+//   background: $gray;
+
+//   h2,
+//   p {
+//     color: $white;
+//   }
 // }
 
 h1,
@@ -15,6 +31,8 @@ h5,
 h6 {
   font-family: $font-primary;
   color: $gray;
+
+  letter-spacing: 1px;
 }
 
 h1 {
@@ -38,5 +56,6 @@ p {
   font-family: $font-secondary;
   font-weight: 300;
   color: $gray;
-  // letter-spacing: 1px;
+
+  letter-spacing: 1px;
 }

@@ -4,6 +4,7 @@ var router = express.Router();
 const indexData = require("../data/index.js");
 const contactoData = require("../data/contacto.js");
 const rrhhData = require("../data/rrhh.js");
+const nosotrosData = require("../data/nosotros.js");
 
 // Home page
 router.get('/', function (req, res, next) {
@@ -18,6 +19,11 @@ router.get("/contacto", function (req, res) {
 // Contacto
 router.get("/rrhh", function (req, res) {
   res.render("rrhh", rrhhData);
+})
+
+// Nosotros
+router.get("/nosotros", function (req, res) {
+  res.render("nosotros", nosotrosData);
 })
 
 module.exports = router;

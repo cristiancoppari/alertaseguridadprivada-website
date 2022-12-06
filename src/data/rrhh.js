@@ -17,20 +17,12 @@ const indexData = {
   },
 
   hero: {
-    // title: "LA MEJOR SOLUCIÓN <br> EN <strong>VIGILANCIA.</strong>",
-
     image: {
-      mobile: "/images/hero-home.png",
-      tablet: "/images/hero-home.png",
-      desktop: "/images/hero-home.png",
-      desktopXL: "/images/hero-home.png",
+      mobile: "/images/hero-rrhh-mobile.jpg",
+      tablet: "/images/hero-rrhh-mobile.jpg",
+      desktop: "/images/hero-rrhh-desktop.jpg",
+      desktopXL: "/images/hero-rrhh-desktopxl.jpg",
     },
-
-    // cta: {
-    //   link: "/servicios",
-
-    //   label: "IR A SERVICIOS"
-    // }
   },
 }
 
