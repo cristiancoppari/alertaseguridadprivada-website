@@ -1,0 +1,54 @@
+section:not(.hero) {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+// section:first-child {
+//   margin-top: 8rem;
+// }
+
+.alertas-background {
+  background: $gray;
+
+  h2,
+  p {
+    color: $white;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-primary;
+  color: $gray;
+
+  letter-spacing: 1px;
+}
+
+h1 {
+  font-weight: 300;
+
+  @include media-breakpoint-up(lg) {
+    font-size: 3rem;
+  }
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 400;
+
+  @include media-breakpoint-up(lg) {
+    font-size: 2.5rem;
+  }
+}
+
+p {
+  font-family: $font-secondary;
+  font-weight: 300;
+  color: $gray;
+
+  letter-spacing: 1px;
+}

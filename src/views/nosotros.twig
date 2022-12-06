@@ -1,0 +1,35 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+  {% include "./modules/header.twig" %}
+
+  {% import "./modules/hero.twig" as heroUtils %}
+  {{ heroUtils.heroBanner(hero) }}
+
+  <section class="nosotros container">
+    <h1>{{ nosotros.title }}</h1>
+
+    {% for text in nosotros.body %}
+      <p>{{ text }}</p>
+    {% endfor %}
+  </section>
+
+  {% import "./modules/text-image.twig" as textImageUtils %}
+
+  <div class="alertas-background">
+    {{ textImageUtils.imageText(nuestroEquipo) }}
+  </div>
+
+  {{ textImageUtils.imageText(estamosParaAyudarte) }}
+
+  <section class="la-mejor-vigilancia container-fluid">
+    <img src="/images/logo-alertas-2.png" alt="Alertas Seguridad Privada">
+
+    <h2>La mejor solución <br> en <strong>vigilancia</strong></h2>
+
+    <a href="/servicios" class="alertas-btn-primary">Ir a servicios</a>
+  </section>
+
+  {% include "./modules/footer.twig" %}
+{% endblock %}
