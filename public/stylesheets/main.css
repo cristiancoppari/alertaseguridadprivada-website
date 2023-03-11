@@ -11716,6 +11716,30 @@ form .form-select {
   }
 }
 
+.como-funciona-nuestro-sistema {
+  margin-bottom: 4rem;
+}
+.como-funciona-nuestro-sistema h2::after, .como-funciona-nuestro-sistema .h2::after {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 25%;
+  margin: 1rem 0;
+  background-color: #216b9f;
+}
+.como-funciona-nuestro-sistema .card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 4rem;
+  flex-wrap: wrap;
+}
+@media (min-width: 768px) {
+  .como-funciona-nuestro-sistema .card-container {
+    flex-direction: row;
+  }
+}
+
 .estamos-para-ayudarte {
   background: url("/images/background-blue.png");
 }
@@ -11780,6 +11804,50 @@ form .form-select {
 }
 .card-nuestros-servicios .content-wrapper h4, .card-nuestros-servicios .content-wrapper .h4 {
   text-align: center;
+}
+
+.card-with-numbers {
+  border-radius: 1rem;
+  box-shadow: 0px 2px 18px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  flex: 1 1 100%;
+}
+@media (min-width: 768px) {
+  .card-with-numbers {
+    flex: 1 1 40%;
+  }
+}
+@media (min-width: 992px) {
+  .card-with-numbers {
+    flex: 1 1 20%;
+  }
+}
+.card-with-numbers .title-wrapper {
+  padding-top: 0.5rem;
+  padding-left: 0.5rem;
+}
+.card-with-numbers .title-wrapper .number {
+  font-size: 4rem;
+  font-weight: 700;
+  font-family: "Quicksand", sans-serif;
+  color: rgba(52, 66, 122, 0.2);
+  line-height: 1;
+}
+.card-with-numbers .title-wrapper h3, .card-with-numbers .title-wrapper .h3 {
+  margin-left: 1.5rem;
+  margin-top: -2.5rem;
+}
+.card-with-numbers .title-wrapper h3::after, .card-with-numbers .title-wrapper .h3::after {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 100%;
+  margin-top: 0.5rem;
+  background-color: #216b9f;
+}
+.card-with-numbers .content-wrapper p {
+  padding: 1rem 1.75rem;
+  font-size: 0.875rem;
 }
 
 footer {

@@ -37,6 +37,30 @@
     }
 }
 
+.como-funciona-nuestro-sistema {
+    margin-bottom: 4rem;
+
+    h2 {
+        @include title-decoration;
+    }
+
+    .card-container {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 2rem;
+
+        margin-top: 4rem;
+
+        flex-wrap: wrap;
+
+        @include media-breakpoint-up(md) {
+            flex-direction: row;
+        }
+    }
+}
+
 .estamos-para-ayudarte {
     background: url("/images/background-blue.png");
 

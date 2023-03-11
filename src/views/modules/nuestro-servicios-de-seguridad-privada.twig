@@ -1,14 +1,14 @@
 <section class="nuestros-servicios-seguridad-privada container">
-    <h2>{{calidadSeguridadCompromiso.title}}</h2>
+    <h2>{{nuestrosServiciosDeSeguridadPrivada.title}}</h2>
 
-    <h3>{{calidadSeguridadCompromiso.subtitle}}</h3>
+    <h3>{{nuestrosServiciosDeSeguridadPrivada.subtitle}}</h3>
 
-    {% for text in calidadSeguridadCompromiso.texts %}
+    {% for text in nuestrosServiciosDeSeguridadPrivada.texts %}
         <p class="paragraph">{{text}}</p>
     {% endfor %}
 
     <div class="card-container">
-    {% for card in calidadSeguridadCompromiso.cards %}
+    {% for card in nuestrosServiciosDeSeguridadPrivada.cards %}
         <article class="card-nuestros-servicios {{card.class}}">
             <div class="title-wrapper">
                 <p>{{card.title}}</p>

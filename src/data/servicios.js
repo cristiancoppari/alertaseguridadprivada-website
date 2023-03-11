@@ -26,7 +26,7 @@ const serviciosData = {
     // }
   },
 
-  calidadSeguridadCompromiso: {
+  nuestrosServiciosDeSeguridadPrivada: {
     title: "Nuestros <strong>Servicios</strong> <br> de Seguridad Privada",
 
     subtitle: "SERVICIOS A MEDIDA",
@@ -59,7 +59,7 @@ const serviciosData = {
   },
 
   comoFuncionaNuestroSistema: {
-    title: "¿Cómo funciona nuestro Sistema?",
+    title: "¿Cómo funciona <br> nuestro <strong>Sistema</strong>?",
 
     cards: [
       {
@@ -73,12 +73,12 @@ const serviciosData = {
         text: "Una vez recibidas las inquietudes de nuestros clientes, nuestros asesores las trasladarán al equipo de trabajo para poder satisfacerlos y por sobre todo, se sientan protegidos.",
       },
       {
-        number: "04",
+        number: "03",
         label: "Prevención",
         text: "Otorgando un protocolo de seguridad adaptable a cada necesidad, instruimos a nuestro personal para prevenir cualquier situación de riesgo dentro de la propiedad privada.",
       },
       {
-        number: "05",
+        number: "04",
         label: "Respuesta",
         text: "Nuestro equipo de guardias se encuentra preparado para afrontar diferentes tareas con mayor eficacia gracias a las normas y las pautas establecidas, dando respuesta a la brevedad.",
       }
