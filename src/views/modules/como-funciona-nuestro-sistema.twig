@@ -1,0 +1,19 @@
+<div class="como-funciona-nuestro-sistema container">
+    <h2>{{comoFuncionaNuestroSistema.title}}</h2>
+
+    <div class="card-container">
+    {% for card in comoFuncionaNuestroSistema.cards %}
+        <article class="card-with-numbers {{card.class}}">
+            <div class="title-wrapper">
+                <p class="number">{{card.number}}</p>
+
+                <h3>{{card.label}}</h3>
+            </div>
+
+            <div class="content-wrapper">
+                <p>{{card.text}}</p>
+            </div>
+        </article>
+    {% endfor %}
+    </div>
+</div>
