@@ -1,5 +1,5 @@
 {% macro heroBanner(hero) %}
-  <section class="hero">
+  <section class="hero {{ hero.classes }}">
     <picture>
       <source media="(min-width: 1920px)" srcset="{{ hero.image.desktopXL }}">
       <source media="(min-width: 1200px)" srcset="{{ hero.image.desktop }}">

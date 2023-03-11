@@ -11683,6 +11683,44 @@ form .form-select {
   margin-bottom: 2rem;
 }
 
+.servicios h1, .servicios .h1 {
+  color: #ffffff;
+}
+
+.estamos-para-ayudarte {
+  background: url("/images/background-blue.png");
+}
+.estamos-para-ayudarte__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.estamos-para-ayudarte h2, .estamos-para-ayudarte .h2,
+.estamos-para-ayudarte p {
+  color: #ffffff;
+  text-align: center;
+}
+.estamos-para-ayudarte h2::after, .estamos-para-ayudarte .h2::after {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 25%;
+  margin: 1rem 0;
+  background-color: #216b9f;
+}
+.estamos-para-ayudarte h2::after, .estamos-para-ayudarte .h2::after {
+  margin: 1rem auto;
+}
+.estamos-para-ayudarte p {
+  margin-bottom: 2rem;
+}
+@media (min-width: 768px) {
+  .estamos-para-ayudarte p {
+    width: 50%;
+  }
+}
+
 footer {
   background-color: #37383a;
   color: #ffffff;

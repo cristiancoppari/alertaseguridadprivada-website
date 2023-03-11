@@ -1,0 +1,21 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+  {% include "./modules/header.twig" %}
+
+  {% import "./modules/hero.twig" as heroUtils %}
+  {{ heroUtils.heroBanner(hero) }}
+
+  <section class="estamos-para-ayudarte">
+    <div class="estamos-para-ayudarte__container container">
+      <h2>{{ estamosParaAyudarte.title }}</h2>
+
+      <p>{{ estamosParaAyudarte.text }}</p>
+
+      <a class="alertas-btn-primary" href="{{ estamosParaAyudarte.cta.link }}">{{ estamosParaAyudarte.cta.label }}</a>
+    </div>
+  </section>
+
+  {% include "./modules/footer.twig" %}
+{% endblock %}

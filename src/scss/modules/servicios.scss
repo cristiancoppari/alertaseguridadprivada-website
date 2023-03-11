@@ -1,0 +1,41 @@
+.servicios {
+  h1 {
+    color: $white;
+  }
+}
+
+.estamos-para-ayudarte {
+  background: url("/images/background-blue.png");
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  h2,
+  p {
+    color: $white;
+
+    text-align: center;
+  }
+
+  h2 {
+    // margin-bottom: 2rem;
+
+    @include title-decoration;
+
+    &::after {
+      margin: 1rem auto;
+    }
+  }
+
+  p {
+    margin-bottom: 2rem;
+
+    @include media-breakpoint-up(md) {
+      width: 50%;
+    }
+  }
+}

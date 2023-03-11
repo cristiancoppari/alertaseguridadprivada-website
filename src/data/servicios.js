@@ -1,6 +1,6 @@
 const header = require("../data/header.js")
 
-const indexData = {
+const serviciosData = {
   title: "Alertas Seguridad Privada",
 
   metaDescription: "Somos la mejor empresa de seguridad privada",
@@ -10,20 +10,20 @@ const indexData = {
   hero: {
     title: "LA MEJOR SOLUCIÓN <br> EN <strong>VIGILANCIA.</strong>",
 
-    classes: "home",
+    classes: "servicios",
 
     image: {
-      mobile: "/images/hero-home.png",
-      tablet: "/images/hero-home.png",
-      desktop: "/images/hero-home.png",
-      desktopXL: "/images/hero-home-desktopxl.jpg",
+      mobile: "/images/hero-servicios-mobile.jpg",
+      tablet: "/images/hero-servicios-mobile.jpg",
+      desktop: "/images/hero-servicios-desktop.jpg",
+      desktopXL: "/images/hero-servicios-desktopxl.jpg",
     },
 
-    cta: {
-      link: "/servicios",
+    // cta: {
+    //   link: "/servicios",
 
-      label: "IR A SERVICIOS"
-    }
+    //   label: "IR A SERVICIOS"
+    // }
   },
 
   calidadSeguridadCompromiso: {
@@ -43,14 +43,12 @@ const indexData = {
       "Comunicate con nosotros llamando a nuestro teléfono, enviando un mensaje por WhatsApp o sino, envianos tu consulta completando el formulario, para que uno de nuestros asesores se ponga en contacto"
     ],
 
-    image: "/images/security-guard.png",
-
     cta: {
       link: "/contacto",
 
-      label: "CONTACTANOS"
+      label: "COTIZAR SERVICIO"
     }
   }
 }
 
-module.exports = indexData;
+module.exports = serviciosData;
