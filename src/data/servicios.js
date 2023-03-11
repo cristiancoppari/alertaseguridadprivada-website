@@ -27,13 +27,62 @@ const serviciosData = {
   },
 
   calidadSeguridadCompromiso: {
-    title: "Calidad <br>Seguridad <br>Compromiso",
+    title: "Nuestros <strong>Servicios</strong> <br> de Seguridad Privada",
 
-    text: [
-      "Alertas Seguridad Privada. Experiencia, responsabilidad y confiabilidad, puesta al servicio de su seguridad."
+    subtitle: "SERVICIOS A MEDIDA",
+
+    texts: [
+      "Partiendo de un detallado análisis de los potenciales riesgos de nuestros clientes y/o prospectos, diseñamos una estrategía a medida de lo requerido por ellos y sus reales necesidades, logrando de esta manera un resultado más eficaz en la gestión de seguridad. Para tal fin, nuestra oferta de servicios se desarrollan mediante la combinación de los siguientes factores: vigilancia presencial, rondas internas/perimetrales, supervisores en horarios de turnos, protección de bienes y control de accesos.",
+      "Además, el aporte de nuestra tecnología en los puestos de vigilancia ortorga un mayor rendimiento de nuestros guardias para desempeñar sus tareas."
     ],
 
-    image: "/images/services.png"
+    cards: [
+      {
+        title: "SERVICIO",
+        label: "Seguridad Física",
+        link: "/servicios/seguridad-fisica",
+        class: "seguridad-fisica"
+      },
+      {
+        title: "SERVICIO",
+        label: "Seguridad Electrónica",
+        link: "/servicios/seguridad-electronica",
+        class: "seguridad-electronica"
+      },
+      {
+        title: "ACCESORIOS",
+        label: "Adicionales Electrónica",
+        link: "/servicios/adicionales-electronica",
+        class: "adicionales-electronica"
+      },
+    ]
+  },
+
+  comoFuncionaNuestroSistema: {
+    title: "¿Cómo funciona nuestro Sistema?",
+
+    cards: [
+      {
+        number: "01",
+        label: "Detección",
+        text: "Cada cliente o propiedad privada cuenta con diferentes necesidades a la hora de requerir un servicio de seguridad privada; nosotros las detectamos y buscamos la mejor solución.",
+      },
+      {
+        number: "02",
+        label: "Recepción",
+        text: "Una vez recibidas las inquietudes de nuestros clientes, nuestros asesores las trasladarán al equipo de trabajo para poder satisfacerlos y por sobre todo, se sientan protegidos.",
+      },
+      {
+        number: "04",
+        label: "Prevención",
+        text: "Otorgando un protocolo de seguridad adaptable a cada necesidad, instruimos a nuestro personal para prevenir cualquier situación de riesgo dentro de la propiedad privada.",
+      },
+      {
+        number: "05",
+        label: "Respuesta",
+        text: "Nuestro equipo de guardias se encuentra preparado para afrontar diferentes tareas con mayor eficacia gracias a las normas y las pautas establecidas, dando respuesta a la brevedad.",
+      }
+    ]
   },
 
   estamosParaAyudarte: {

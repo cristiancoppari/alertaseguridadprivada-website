@@ -1,0 +1,25 @@
+<section class="nuestros-servicios-seguridad-privada container">
+    <h2>{{calidadSeguridadCompromiso.title}}</h2>
+
+    <h3>{{calidadSeguridadCompromiso.subtitle}}</h3>
+
+    {% for text in calidadSeguridadCompromiso.texts %}
+        <p class="paragraph">{{text}}</p>
+    {% endfor %}
+
+    <div class="card-container">
+    {% for card in calidadSeguridadCompromiso.cards %}
+        <article class="card-nuestros-servicios {{card.class}}">
+            <div class="title-wrapper">
+                <p>{{card.title}}</p>
+            </div>
+
+            <div class="content-wrapper">
+                <h4>{{card.label}}</h4>
+
+                <a href={{card.link}} class="alertas-btn-primary">VER MÁS</a>
+            </div>
+        </article>
+    {% endfor %}
+    </div>
+</section>

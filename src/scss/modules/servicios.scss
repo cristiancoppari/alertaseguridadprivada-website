@@ -1,41 +1,72 @@
 .servicios {
-  h1 {
-    color: $white;
-  }
+    h1 {
+        color: $white;
+    }
+}
+
+.nuestros-servicios-seguridad-privada {
+    h2 {
+        @include title-decoration;
+    }
+
+    h3 {
+        font-size: 1rem;
+        font-weight: 700;
+
+        margin: 2rem 0;
+    }
+
+    .paragraph {
+        margin-bottom: 1rem;
+    }
+
+    .card-container {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 2rem;
+
+        margin-top: 4rem;
+
+        @include media-breakpoint-up(md) {
+            flex-direction: row;
+        }
+    }
 }
 
 .estamos-para-ayudarte {
-  background: url("/images/background-blue.png");
+    background: url("/images/background-blue.png");
 
-  &__container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  h2,
-  p {
-    color: $white;
-
-    text-align: center;
-  }
-
-  h2 {
-    // margin-bottom: 2rem;
-
-    @include title-decoration;
-
-    &::after {
-      margin: 1rem auto;
+    &__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
-  }
 
-  p {
-    margin-bottom: 2rem;
+    h2,
+    p {
+        color: $white;
 
-    @include media-breakpoint-up(md) {
-      width: 50%;
+        text-align: center;
     }
-  }
+
+    h2 {
+        // margin-bottom: 2rem;
+
+        @include title-decoration;
+
+        &::after {
+            margin: 1rem auto;
+        }
+    }
+
+    p {
+        margin-bottom: 2rem;
+
+        @include media-breakpoint-up(md) {
+            width: 50%;
+        }
+    }
 }
