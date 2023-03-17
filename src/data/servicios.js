@@ -49,12 +49,12 @@ const serviciosData = {
         link: "/servicios/seguridad-electronica",
         class: "seguridad-electronica"
       },
-      {
-        title: "ACCESORIOS",
-        label: "Adicionales Electrónica",
-        link: "/servicios/adicionales-electronica",
-        class: "adicionales-electronica"
-      },
+      // {
+      //   title: "ACCESORIOS",
+      //   label: "Adicionales Electrónica",
+      //   link: "/servicios/adicionales-electronica",
+      //   class: "adicionales-electronica"
+      // },
     ]
   },
 
@@ -96,6 +96,66 @@ const serviciosData = {
       link: "/contacto",
 
       label: "COTIZAR SERVICIO"
+    }
+  },
+
+  servicios: {
+    seguridadFisica: {
+      hero: {
+        image: {
+          mobile: "/images/hero-segfisica-mobile.jpg",
+          tablet: "/images/hero-segfisica-mobile.jpg",
+          desktop: "/images/hero-segfisica-desktop.jpg",
+          desktopXL: "/images/hero-segfisica-desktopxl.jpg",
+        },
+      },
+
+      section1: {
+        title: "Nuestros <strong>Servicios</strong><br> de Seguridad Privada",
+        subtitle: "Servicios a medida",
+
+        content: {
+          title: "Seguridad Física",
+          text: "El rol de la seguridad física es la protección de personas y bienes contra cualquier tipo de riesgo externo. A su vez los guardias son controlados por supervisores, para asegurar el cumplimiento de las normativas predispuestas por el contratante.",
+
+          items: [
+            {
+              label: "SERVICIOS DE SEGURIDAD A PROPIEDADES PRIVADAS",
+              text: "Brindamos seguridad física en propiedades horizontales, obras en construcción, fábricas e instituciones, entre otras.",
+              data_service: "propiedades-privadas"
+            },
+            {
+              label: "CUSTODIA DE MERCANCÍA EN TRÁNSITO",
+              text: "Protección y custodia en el traslado de materiales y objetos de valor.",
+              data_service: "mercancia-en-transito"
+            },
+            {
+              label: "SUPERVISORES EN LOS HORARIOS DE SERVICIO",
+              text: "Contamos con supervisores que realizan sus recorridos en los horarios de servicio para garantizar un mejor desempeño de los guardias.",
+              data_service: "supervisores"
+            },
+            {
+              label: "ATENCIÓN DE URGENCIAS LAS 24HS.",
+              text: "Ante cualquier urgencia contamos con lineas telefónicas para que puedan comunicarse las 24 horas.",
+              data_service: "urgencias"
+            },
+          ]
+        }
+      },
+
+      section2: {
+        title: "¿Dónde?",
+        text: "Ofrecemos nuestro servicio adaptable a cualquier necesidad del cliente, en las siguientes áreas:",
+
+        carousel: {
+          id: "carousel-seguridad-fisica",
+          images: [
+            "/images/foto1-segfisica.jpg",
+            "/images/foto2-segfisica.jpg",
+            "/images/foto3-segfisica.jpg",
+          ]
+        }
+      }
     }
   }
 }

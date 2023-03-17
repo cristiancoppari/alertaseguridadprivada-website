@@ -6,6 +6,7 @@ const contactoData = require("../data/contacto.js");
 const rrhhData = require("../data/rrhh.js");
 const nosotrosData = require("../data/nosotros.js");
 const serviciosData = require('../data/servicios.js');
+const seguridadFisicaData = require('../data/seguridad-fisica.js');
 
 // Home page
 router.get('/', function (req, res, next) {
@@ -30,6 +31,11 @@ router.get("/nosotros", function (req, res) {
 // Servicios
 router.get("/servicios", function (req, res) {
   res.render("servicios", serviciosData);
+})
+
+// Servicio
+router.get("/servicios/seguridad-fisica", function (req, res) {
+  res.render("servicio", seguridadFisicaData);
 })
 
 module.exports = router;
