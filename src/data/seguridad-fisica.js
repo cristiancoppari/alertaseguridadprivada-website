@@ -5,6 +5,8 @@ const serviciosData = {
 
   metaDescription: "Somos la mejor empresa de seguridad privada",
 
+  script: "/javascript/servicios.js",
+
   header,
 
   hero: {
@@ -66,7 +68,9 @@ const serviciosData = {
 
   section2: {
     title: "¿Dónde?",
-    text: "Ofrecemos nuestro servicio adaptable a cualquier necesidad del cliente, en las siguientes áreas:",
+    texts: [
+      "Ofrecemos nuestro servicio adaptable a cualquier necesidad del cliente, en las siguientes áreas:"
+    ],
 
     carousel: {
       id: "carousel-seguridad-fisica",

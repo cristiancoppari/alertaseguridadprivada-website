@@ -3,14 +3,15 @@ const path = require("path");
 module.exports = {
   mode: "development",
 
-  entry: "./src/javascript/main.js",
+  entry: {
+    servicios: "./src/javascript/servicios.js",
+    // modules: "./src/javascript/modules.js",
+  },
 
   output: {
     path: path.resolve(__dirname, "public"),
 
     filename: "[name].js",
-
-    // publicPath: "/public/javascripts"
   },
 
   module: {

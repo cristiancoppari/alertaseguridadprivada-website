@@ -34,6 +34,29 @@
       {% endfor %}
       </div>
     </div>
+
+    <div class="servicio__carousel-section">
+      <h2>{{section2.title}}</h2>
+
+      {% for text in section2.texts %}
+        <p class="text">{{text}}</p>
+      {% endfor %}
+
+      <section class="splide" id="serviciosCarousel">
+        <div class="splide__track">
+          <ul class="splide__list">
+            {% for image in section2.carousel.images %}
+            <li class="splide__slide">
+              <div class="image">
+                <img src="{{image}}" alt="Alertas Seguridad Privada">
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </section>
+      
+    </div>
   </section>
 
   <section class="estamos-para-ayudarte">

@@ -40,7 +40,7 @@ const CONFIG = {
       watch: "src/javascript/**/*.js",
 
       // Destination folder for the scripts
-      dest: "public/javascripts/",
+      dest: "public/javascript/",
     },
 
     server: {
