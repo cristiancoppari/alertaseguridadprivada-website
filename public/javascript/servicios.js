@@ -23,6 +23,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "CLASS_LIST": () => (/* binding */ CLASS_LIST),
 /* harmony export */   "CLASS_LOADING": () => (/* binding */ CLASS_LOADING),
 /* harmony export */   "CLASS_NEXT": () => (/* binding */ CLASS_NEXT),
+/* harmony export */   "CLASS_OVERFLOW": () => (/* binding */ CLASS_OVERFLOW),
 /* harmony export */   "CLASS_PAGINATION": () => (/* binding */ CLASS_PAGINATION),
 /* harmony export */   "CLASS_PAGINATION_PAGE": () => (/* binding */ CLASS_PAGINATION_PAGE),
 /* harmony export */   "CLASS_PREV": () => (/* binding */ CLASS_PREV),
@@ -49,6 +50,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "EVENT_DRAG": () => (/* binding */ EVENT_DRAG),
 /* harmony export */   "EVENT_DRAGGED": () => (/* binding */ EVENT_DRAGGED),
 /* harmony export */   "EVENT_DRAGGING": () => (/* binding */ EVENT_DRAGGING),
+/* harmony export */   "EVENT_END_INDEX_CHANGED": () => (/* binding */ EVENT_END_INDEX_CHANGED),
 /* harmony export */   "EVENT_HIDDEN": () => (/* binding */ EVENT_HIDDEN),
 /* harmony export */   "EVENT_INACTIVE": () => (/* binding */ EVENT_INACTIVE),
 /* harmony export */   "EVENT_LAZYLOAD_LOADED": () => (/* binding */ EVENT_LAZYLOAD_LOADED),
@@ -56,6 +58,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "EVENT_MOVE": () => (/* binding */ EVENT_MOVE),
 /* harmony export */   "EVENT_MOVED": () => (/* binding */ EVENT_MOVED),
 /* harmony export */   "EVENT_NAVIGATION_MOUNTED": () => (/* binding */ EVENT_NAVIGATION_MOUNTED),
+/* harmony export */   "EVENT_OVERFLOW": () => (/* binding */ EVENT_OVERFLOW),
 /* harmony export */   "EVENT_PAGINATION_MOUNTED": () => (/* binding */ EVENT_PAGINATION_MOUNTED),
 /* harmony export */   "EVENT_PAGINATION_UPDATED": () => (/* binding */ EVENT_PAGINATION_UPDATED),
 /* harmony export */   "EVENT_READY": () => (/* binding */ EVENT_READY),
@@ -90,7 +93,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 /*!
  * Splide.js
- * Version  : 4.0.4
+ * Version  : 4.1.4
  * License  : MIT
  * Copyright: 2022 Naotoshi Fujita
  */
@@ -150,7 +153,11 @@ function isNull(subject) {
 }
 
 function isHTMLElement(subject) {
-  return subject instanceof HTMLElement;
+  try {
+    return subject instanceof (subject.ownerDocument.defaultView || window).HTMLElement;
+  } catch (e) {
+    return false;
+  }
 }
 
 function toArray(value) {
@@ -217,18 +224,9 @@ var ownKeys = Object.keys;
 
 function forOwn(object, iteratee, right) {
   if (object) {
-    var keys = ownKeys(object);
-    keys = right ? keys.reverse() : keys;
-
-    for (var i = 0; i < keys.length; i++) {
-      var key = keys[i];
-
-      if (key !== "__proto__") {
-        if (iteratee(object[key], key) === false) {
-          break;
-        }
-      }
-    }
+    (right ? ownKeys(object).reverse() : ownKeys(object)).forEach(function (key) {
+      key !== "__proto__" && iteratee(object[key], key);
+    });
   }
 
   return object;
@@ -259,7 +257,7 @@ function merge(object) {
 }
 
 function omit(object, keys) {
-  toArray(keys || ownKeys(object)).forEach(function (key) {
+  forEach(keys || ownKeys(object), function (key) {
     delete object[key];
   });
 }
@@ -387,9 +385,9 @@ function approximatelyEqual(x, y, epsilon) {
   return abs(x - y) < epsilon;
 }
 
-function between(number, minOrMax, maxOrMin, exclusive) {
-  var minimum = min(minOrMax, maxOrMin);
-  var maximum = max(minOrMax, maxOrMin);
+function between(number, x, y, exclusive) {
+  var minimum = min(x, y);
+  var maximum = max(x, y);
   return exclusive ? minimum < number && number < maximum : minimum <= number && number <= maximum;
 }
 
@@ -497,13 +495,11 @@ var EVENT_MOUNTED = "mounted";
 var EVENT_READY = "ready";
 var EVENT_MOVE = "move";
 var EVENT_MOVED = "moved";
-var EVENT_SHIFTED = "shifted";
 var EVENT_CLICK = "click";
 var EVENT_ACTIVE = "active";
 var EVENT_INACTIVE = "inactive";
 var EVENT_VISIBLE = "visible";
 var EVENT_HIDDEN = "hidden";
-var EVENT_SLIDE_KEYDOWN = "slide:keydown";
 var EVENT_REFRESH = "refresh";
 var EVENT_UPDATED = "updated";
 var EVENT_RESIZE = "resize";
@@ -513,6 +509,7 @@ var EVENT_DRAGGING = "dragging";
 var EVENT_DRAGGED = "dragged";
 var EVENT_SCROLL = "scroll";
 var EVENT_SCROLLED = "scrolled";
+var EVENT_OVERFLOW = "overflow";
 var EVENT_DESTROY = "destroy";
 var EVENT_ARROWS_MOUNTED = "arrows:mounted";
 var EVENT_ARROWS_UPDATED = "arrows:updated";
@@ -523,6 +520,9 @@ var EVENT_AUTOPLAY_PLAY = "autoplay:play";
 var EVENT_AUTOPLAY_PLAYING = "autoplay:playing";
 var EVENT_AUTOPLAY_PAUSE = "autoplay:pause";
 var EVENT_LAZYLOAD_LOADED = "lazyload:loaded";
+var EVENT_SLIDE_KEYDOWN = "sk";
+var EVENT_SHIFTED = "sh";
+var EVENT_END_INDEX_CHANGED = "ei";
 
 function EventInterface(Splide2) {
   var bus = Splide2 ? Splide2.event.bus : document.createDocumentFragment();
@@ -572,15 +572,15 @@ function RequestInterval(interval, onInterval, onUpdate, limit) {
         }
       }
 
-      raf(update);
+      id = raf(update);
     }
   }
 
   function start(resume) {
-    !resume && cancel();
+    resume || cancel();
     startTime = now() - (resume ? rate * interval : 0);
     paused = false;
-    raf(update);
+    id = raf(update);
   }
 
   function pause() {
@@ -639,19 +639,10 @@ function State(initialState) {
 }
 
 function Throttle(func, duration) {
-  var interval;
-
-  function throttled() {
-    if (!interval) {
-      interval = RequestInterval(duration || 0, function () {
-        func();
-        interval = null;
-      }, null, 1);
-      interval.start();
-    }
-  }
-
-  return throttled;
+  var interval = RequestInterval(duration || 0, func, null, 1);
+  return function () {
+    interval.isPaused() && interval.start();
+  };
 }
 
 function Media(Splide2, Components2, options) {
@@ -709,11 +700,11 @@ function Media(Splide2, Components2, options) {
     }
   }
 
-  function set(opts, user) {
+  function set(opts, base, notify) {
     merge(options, opts);
-    user && merge(Object.getPrototypeOf(options), opts);
+    base && merge(Object.getPrototypeOf(options), opts);
 
-    if (!state.is(CREATED)) {
+    if (notify || !state.is(CREATED)) {
       Splide2.emit(EVENT_UPDATED, options);
     }
   }
@@ -781,33 +772,36 @@ var ARIA_LIVE = ARIA_PREFIX + "live";
 var ARIA_BUSY = ARIA_PREFIX + "busy";
 var ARIA_ATOMIC = ARIA_PREFIX + "atomic";
 var ALL_ATTRIBUTES = [ROLE, TAB_INDEX, DISABLED, ARIA_CONTROLS, ARIA_CURRENT, ARIA_LABEL, ARIA_LABELLEDBY, ARIA_HIDDEN, ARIA_ORIENTATION, ARIA_ROLEDESCRIPTION];
+var CLASS_PREFIX = PROJECT_CODE + "__";
+var STATUS_CLASS_PREFIX = "is-";
 var CLASS_ROOT = PROJECT_CODE;
-var CLASS_TRACK = PROJECT_CODE + "__track";
-var CLASS_LIST = PROJECT_CODE + "__list";
-var CLASS_SLIDE = PROJECT_CODE + "__slide";
+var CLASS_TRACK = CLASS_PREFIX + "track";
+var CLASS_LIST = CLASS_PREFIX + "list";
+var CLASS_SLIDE = CLASS_PREFIX + "slide";
 var CLASS_CLONE = CLASS_SLIDE + "--clone";
 var CLASS_CONTAINER = CLASS_SLIDE + "__container";
-var CLASS_ARROWS = PROJECT_CODE + "__arrows";
-var CLASS_ARROW = PROJECT_CODE + "__arrow";
+var CLASS_ARROWS = CLASS_PREFIX + "arrows";
+var CLASS_ARROW = CLASS_PREFIX + "arrow";
 var CLASS_ARROW_PREV = CLASS_ARROW + "--prev";
 var CLASS_ARROW_NEXT = CLASS_ARROW + "--next";
-var CLASS_PAGINATION = PROJECT_CODE + "__pagination";
+var CLASS_PAGINATION = CLASS_PREFIX + "pagination";
 var CLASS_PAGINATION_PAGE = CLASS_PAGINATION + "__page";
-var CLASS_PROGRESS = PROJECT_CODE + "__progress";
+var CLASS_PROGRESS = CLASS_PREFIX + "progress";
 var CLASS_PROGRESS_BAR = CLASS_PROGRESS + "__bar";
-var CLASS_TOGGLE = PROJECT_CODE + "__toggle";
+var CLASS_TOGGLE = CLASS_PREFIX + "toggle";
 var CLASS_TOGGLE_PLAY = CLASS_TOGGLE + "__play";
 var CLASS_TOGGLE_PAUSE = CLASS_TOGGLE + "__pause";
-var CLASS_SPINNER = PROJECT_CODE + "__spinner";
-var CLASS_SR = PROJECT_CODE + "__sr";
-var CLASS_INITIALIZED = "is-initialized";
-var CLASS_ACTIVE = "is-active";
-var CLASS_PREV = "is-prev";
-var CLASS_NEXT = "is-next";
-var CLASS_VISIBLE = "is-visible";
-var CLASS_LOADING = "is-loading";
-var CLASS_FOCUS_IN = "is-focus-in";
-var STATUS_CLASSES = [CLASS_ACTIVE, CLASS_VISIBLE, CLASS_PREV, CLASS_NEXT, CLASS_LOADING, CLASS_FOCUS_IN];
+var CLASS_SPINNER = CLASS_PREFIX + "spinner";
+var CLASS_SR = CLASS_PREFIX + "sr";
+var CLASS_INITIALIZED = STATUS_CLASS_PREFIX + "initialized";
+var CLASS_ACTIVE = STATUS_CLASS_PREFIX + "active";
+var CLASS_PREV = STATUS_CLASS_PREFIX + "prev";
+var CLASS_NEXT = STATUS_CLASS_PREFIX + "next";
+var CLASS_VISIBLE = STATUS_CLASS_PREFIX + "visible";
+var CLASS_LOADING = STATUS_CLASS_PREFIX + "loading";
+var CLASS_FOCUS_IN = STATUS_CLASS_PREFIX + "focus-in";
+var CLASS_OVERFLOW = STATUS_CLASS_PREFIX + "overflow";
+var STATUS_CLASSES = [CLASS_ACTIVE, CLASS_VISIBLE, CLASS_PREV, CLASS_NEXT, CLASS_LOADING, CLASS_FOCUS_IN, CLASS_OVERFLOW];
 var CLASSES = {
   slide: CLASS_SLIDE,
   clone: CLASS_CLONE,
@@ -975,7 +969,6 @@ function Slide$1(Splide2, index, slideIndex, slide) {
   var label = getAttribute(slide, ARIA_LABEL);
   var isClone = slideIndex > -1;
   var container = child(slide, "." + CLASS_CONTAINER);
-  var focusableNodes = queryAll(slide, options.focusableNodes || "");
   var destroyed;
 
   function mount() {
@@ -1054,7 +1047,7 @@ function Slide$1(Splide2, index, slideIndex, slide) {
       setAttribute(slide, ARIA_HIDDEN, hidden || "");
     }
 
-    setAttribute(focusableNodes, TAB_INDEX, hidden ? -1 : "");
+    setAttribute(queryAll(slide, options.focusableNodes || ""), TAB_INDEX, hidden ? -1 : "");
 
     if (slideFocus) {
       setAttribute(slide, TAB_INDEX, hidden ? -1 : 0);
@@ -1087,8 +1080,8 @@ function Slide$1(Splide2, index, slideIndex, slide) {
 
     var trackRect = rect(Components.Elements.track);
     var slideRect = rect(slide);
-    var left = resolve("left");
-    var right = resolve("right");
+    var left = resolve("left", true);
+    var right = resolve("right", true);
     return floor(trackRect[left]) <= ceil(slideRect[left]) && floor(slideRect[right]) <= ceil(trackRect[right]);
   }
 
@@ -1132,11 +1125,6 @@ function Slides(Splide2, Components2, options) {
     init();
     on(EVENT_REFRESH, destroy);
     on(EVENT_REFRESH, init);
-    on([EVENT_MOUNTED, EVENT_REFRESH], function () {
-      Slides2.sort(function (Slide1, Slide2) {
-        return Slide1.index - Slide2.index;
-      });
-    });
   }
 
   function init() {
@@ -1162,6 +1150,9 @@ function Slides(Splide2, Components2, options) {
     var object = Slide$1(Splide2, index, slideIndex, slide);
     object.mount();
     Slides2.push(object);
+    Slides2.sort(function (Slide1, Slide2) {
+      return Slide1.index - Slide2.index;
+    });
   }
 
   function get(excludeClones) {
@@ -1281,6 +1272,7 @@ function Layout(Splide2, Components2, options) {
       styleSlides = Slides.style;
   var vertical;
   var rootRect;
+  var overflow;
 
   function mount() {
     init();
@@ -1290,24 +1282,28 @@ function Layout(Splide2, Components2, options) {
   }
 
   function init() {
-    rootRect = null;
     vertical = options.direction === TTB;
     style(root, "maxWidth", unit(options.width));
     style(track, resolve("paddingLeft"), cssPadding(false));
     style(track, resolve("paddingRight"), cssPadding(true));
-    resize();
+    resize(true);
   }
 
-  function resize() {
+  function resize(force) {
     var newRect = rect(root);
 
-    if (!rootRect || rootRect.width !== newRect.width || rootRect.height !== newRect.height) {
+    if (force || rootRect.width !== newRect.width || rootRect.height !== newRect.height) {
       style(track, "height", cssTrackHeight());
       styleSlides(resolve("marginRight"), unit(options.gap));
       styleSlides("width", cssSlideWidth());
       styleSlides("height", cssSlideHeight(), true);
       rootRect = newRect;
       emit(EVENT_RESIZED);
+
+      if (overflow !== (overflow = isOverflow())) {
+        toggleClass(root, CLASS_OVERFLOW, overflow);
+        emit(EVENT_OVERFLOW, overflow);
+      }
     }
   }
 
@@ -1367,8 +1363,8 @@ function Layout(Splide2, Components2, options) {
     return 0;
   }
 
-  function sliderSize() {
-    return totalSize(Splide2.length - 1, true) - totalSize(-1, true);
+  function sliderSize(withoutGap) {
+    return totalSize(Splide2.length - 1) - totalSize(0) + slideSize(0, withoutGap);
   }
 
   function getGap() {
@@ -1380,23 +1376,27 @@ function Layout(Splide2, Components2, options) {
     return parseFloat(style(track, resolve("padding" + (right ? "Right" : "Left")))) || 0;
   }
 
+  function isOverflow() {
+    return Splide2.is(FADE) || sliderSize(true) > listSize();
+  }
+
   return {
     mount: mount,
+    resize: resize,
     listSize: listSize,
     slideSize: slideSize,
     sliderSize: sliderSize,
     totalSize: totalSize,
-    getPadding: getPadding
+    getPadding: getPadding,
+    isOverflow: isOverflow
   };
 }
 
 var MULTIPLIER = 2;
 
 function Clones(Splide2, Components2, options) {
-  var _EventInterface4 = EventInterface(Splide2),
-      on = _EventInterface4.on,
-      emit = _EventInterface4.emit;
-
+  var event = EventInterface(Splide2);
+  var on = event.on;
   var Elements = Components2.Elements,
       Slides = Components2.Slides;
   var resolve = Components2.Direction.resolve;
@@ -1404,27 +1404,33 @@ function Clones(Splide2, Components2, options) {
   var cloneCount;
 
   function mount() {
-    init();
-    on(EVENT_REFRESH, destroy);
-    on(EVENT_REFRESH, init);
+    on(EVENT_REFRESH, remount);
     on([EVENT_UPDATED, EVENT_RESIZE], observe);
-  }
 
-  function init() {
     if (cloneCount = computeCloneCount()) {
       generate(cloneCount);
-      emit(EVENT_RESIZE);
+      Components2.Layout.resize(true);
     }
+  }
+
+  function remount() {
+    destroy();
+    mount();
   }
 
   function destroy() {
     remove(clones);
     empty(clones);
+    event.destroy();
   }
 
   function observe() {
-    if (cloneCount < computeCloneCount()) {
-      emit(EVENT_REFRESH);
+    var count = computeCloneCount();
+
+    if (cloneCount !== count) {
+      if (cloneCount < count || !count) {
+        event.emit(EVENT_REFRESH);
+      }
     }
   }
 
@@ -1459,7 +1465,7 @@ function Clones(Splide2, Components2, options) {
 
     if (!Splide2.is(LOOP)) {
       clones2 = 0;
-    } else if (!clones2) {
+    } else if (isUndefined(clones2)) {
       var fixedSize = options[resolve("fixedWidth")] && Components2.Layout.slideSize(0);
       var fixedCount = fixedSize && ceil(rect(Elements.track)[resolve("width")] / fixedSize);
       clones2 = fixedCount || options[resolve("autoWidth")] && Splide2.length || options.perPage * MULTIPLIER;
@@ -1475,9 +1481,9 @@ function Clones(Splide2, Components2, options) {
 }
 
 function Move(Splide2, Components2, options) {
-  var _EventInterface5 = EventInterface(Splide2),
-      on = _EventInterface5.on,
-      emit = _EventInterface5.emit;
+  var _EventInterface4 = EventInterface(Splide2),
+      on = _EventInterface4.on,
+      emit = _EventInterface4.emit;
 
   var set = Splide2.state.set;
   var _Components2$Layout = Components2.Layout,
@@ -1508,12 +1514,9 @@ function Move(Splide2, Components2, options) {
   }
 
   function move(dest, index, prev, callback) {
-    var position = getPosition();
-    var crossing = sign(dest - prev) * orient(toPosition(dest) - position) < 0;
-
-    if ((dest !== index || crossing) && canShift(dest > prev)) {
+    if (dest !== index && canShift(dest > prev)) {
       cancel();
-      translate(shift(position, dest > prev), true);
+      translate(shift(getPosition(), dest > prev), true);
     }
 
     set(MOVING);
@@ -1539,9 +1542,9 @@ function Move(Splide2, Components2, options) {
 
   function loop(position) {
     if (Splide2.is(LOOP)) {
-      var diff = orient(position - getPosition());
-      var exceededMin = exceededLimit(false, position) && diff < 0;
-      var exceededMax = exceededLimit(true, position) && diff > 0;
+      var index = toIndex(position);
+      var exceededMax = index > Components2.Controller.getEnd();
+      var exceededMin = index < 0;
 
       if (exceededMin || exceededMax) {
         position = shift(position, exceededMax);
@@ -1559,7 +1562,7 @@ function Move(Splide2, Components2, options) {
   }
 
   function cancel() {
-    translate(getPosition());
+    translate(getPosition(), true);
     Transition.cancel();
   }
 
@@ -1595,7 +1598,7 @@ function Move(Splide2, Components2, options) {
 
   function trim(position) {
     if (options.trimSpace && Splide2.is(SLIDE)) {
-      position = clamp(position, 0, orient(sliderSize() - listSize()));
+      position = clamp(position, 0, orient(sliderSize(true) - listSize()));
     }
 
     return position;
@@ -1639,8 +1642,9 @@ function Move(Splide2, Components2, options) {
 }
 
 function Controller(Splide2, Components2, options) {
-  var _EventInterface6 = EventInterface(Splide2),
-      on = _EventInterface6.on;
+  var _EventInterface5 = EventInterface(Splide2),
+      on = _EventInterface5.on,
+      emit = _EventInterface5.emit;
 
   var Move = Components2.Move;
   var getPosition = Move.getPosition,
@@ -1649,11 +1653,13 @@ function Controller(Splide2, Components2, options) {
   var _Components2$Slides = Components2.Slides,
       isEnough = _Components2$Slides.isEnough,
       getLength = _Components2$Slides.getLength;
+  var omitEnd = options.omitEnd;
   var isLoop = Splide2.is(LOOP);
   var isSlide = Splide2.is(SLIDE);
   var getNext = apply(getAdjacent, false);
   var getPrev = apply(getAdjacent, true);
   var currIndex = options.start || 0;
+  var endIndex;
   var prevIndex = currIndex;
   var slideCount;
   var perMove;
@@ -1661,18 +1667,26 @@ function Controller(Splide2, Components2, options) {
 
   function mount() {
     init();
-    on([EVENT_UPDATED, EVENT_REFRESH], init);
+    on([EVENT_UPDATED, EVENT_REFRESH, EVENT_END_INDEX_CHANGED], init);
+    on(EVENT_RESIZED, onResized);
   }
 
   function init() {
     slideCount = getLength(true);
     perMove = options.perMove;
     perPage = options.perPage;
-    var index = clamp(currIndex, 0, slideCount - 1);
+    endIndex = getEnd();
+    var index = clamp(currIndex, 0, omitEnd ? endIndex : slideCount - 1);
 
     if (index !== currIndex) {
       currIndex = index;
       Move.reposition();
+    }
+  }
+
+  function onResized() {
+    if (endIndex !== getEnd()) {
+      emit(EVENT_END_INDEX_CHANGED);
     }
   }
 
@@ -1690,7 +1704,8 @@ function Controller(Splide2, Components2, options) {
 
   function scroll(destination, duration, snap, callback) {
     Components2.Scroll.scroll(destination, duration, snap, function () {
-      setIndex(loop(Move.toIndex(Move.getPosition())));
+      var index = loop(Move.toIndex(getPosition()));
+      setIndex(omitEnd ? min(index, endIndex) : index);
       callback && callback();
     });
   }
@@ -1711,7 +1726,7 @@ function Controller(Splide2, Components2, options) {
         index = getPrev(true);
       }
     } else {
-      index = isLoop ? control : clamp(control, 0, getEnd());
+      index = isLoop ? control : clamp(control, 0, endIndex);
     }
 
     return index;
@@ -1723,7 +1738,7 @@ function Controller(Splide2, Components2, options) {
 
     if (dest === -1 && isSlide) {
       if (!approximatelyEqual(getPosition(), getLimit(!prev), 1)) {
-        return prev ? 0 : getEnd();
+        return prev ? 0 : endIndex;
       }
     }
 
@@ -1731,8 +1746,7 @@ function Controller(Splide2, Components2, options) {
   }
 
   function computeDestIndex(dest, from, snapPage) {
-    if (isEnough()) {
-      var end = getEnd();
+    if (isEnough() || hasFocus()) {
       var index = computeMovableDestIndex(dest);
 
       if (index !== dest) {
@@ -1741,14 +1755,14 @@ function Controller(Splide2, Components2, options) {
         snapPage = false;
       }
 
-      if (dest < 0 || dest > end) {
-        if (between(0, dest, from, true) || between(end, from, dest, true)) {
+      if (dest < 0 || dest > endIndex) {
+        if (!perMove && (between(0, dest, from, true) || between(endIndex, from, dest, true))) {
           dest = toIndex(toPage(dest));
         } else {
           if (isLoop) {
             dest = snapPage ? dest < 0 ? -(slideCount % perPage || perPage) : slideCount : dest;
           } else if (options.rewind) {
-            dest = dest < 0 ? end : 0;
+            dest = dest < 0 ? endIndex : 0;
           } else {
             dest = -1;
           }
@@ -1782,20 +1796,29 @@ function Controller(Splide2, Components2, options) {
   }
 
   function getEnd() {
-    return max(slideCount - (hasFocus() || isLoop && perMove ? 1 : perPage), 0);
+    var end = slideCount - (hasFocus() || isLoop && perMove ? 1 : perPage);
+
+    while (omitEnd && end-- > 0) {
+      if (toPosition(slideCount - 1, true) !== toPosition(end, true)) {
+        end++;
+        break;
+      }
+    }
+
+    return clamp(end, 0, slideCount - 1);
   }
 
   function toIndex(page) {
-    return clamp(hasFocus() ? page : perPage * page, 0, getEnd());
+    return clamp(hasFocus() ? page : perPage * page, 0, endIndex);
   }
 
   function toPage(index) {
-    return hasFocus() ? index : floor((index >= getEnd() ? slideCount - 1 : index) / perPage);
+    return hasFocus() ? min(index, endIndex) : floor((index >= endIndex ? slideCount - 1 : index) / perPage);
   }
 
   function toDest(destination) {
     var closest = Move.toIndex(destination);
-    return isSlide ? clamp(closest, 0, getEnd()) : closest;
+    return isSlide ? clamp(closest, 0, endIndex) : closest;
   }
 
   function setIndex(index) {
@@ -1848,9 +1871,9 @@ function Arrows(Splide2, Components2, options) {
       i18n = options.i18n;
   var Elements = Components2.Elements,
       Controller = Components2.Controller;
-  var userArrows = Elements.arrows,
+  var placeholder = Elements.arrows,
       track = Elements.track;
-  var wrapper = userArrows;
+  var wrapper = placeholder;
   var prev = Elements.prev;
   var next = Elements.next;
   var created;
@@ -1896,7 +1919,7 @@ function Arrows(Splide2, Components2, options) {
     removeClass(wrapper, wrapperClasses);
 
     if (created) {
-      remove(userArrows ? [prev, next] : wrapper);
+      remove(placeholder ? [prev, next] : wrapper);
       prev = next = null;
     } else {
       removeAttribute([prev, next], ALL_ATTRIBUTES);
@@ -1904,7 +1927,7 @@ function Arrows(Splide2, Components2, options) {
   }
 
   function listen() {
-    on([EVENT_MOVED, EVENT_REFRESH, EVENT_SCROLLED], update);
+    on([EVENT_MOUNTED, EVENT_MOVED, EVENT_REFRESH, EVENT_SCROLLED, EVENT_END_INDEX_CHANGED], update);
     bind(next, "click", apply(go, ">"));
     bind(prev, "click", apply(go, "<"));
   }
@@ -1914,12 +1937,12 @@ function Arrows(Splide2, Components2, options) {
   }
 
   function createArrows() {
-    wrapper = userArrows || create("div", classes.arrows);
+    wrapper = placeholder || create("div", classes.arrows);
     prev = createArrow(true);
     next = createArrow(false);
     created = true;
     append(wrapper, [prev, next]);
-    !userArrows && before(wrapper, track);
+    !placeholder && before(wrapper, track);
   }
 
   function createArrow(prev2) {
@@ -1928,32 +1951,35 @@ function Arrows(Splide2, Components2, options) {
   }
 
   function update() {
-    var index = Splide2.index;
-    var prevIndex = Controller.getPrev();
-    var nextIndex = Controller.getNext();
-    var prevLabel = prevIndex > -1 && index < prevIndex ? i18n.last : i18n.prev;
-    var nextLabel = nextIndex > -1 && index > nextIndex ? i18n.first : i18n.next;
-    prev.disabled = prevIndex < 0;
-    next.disabled = nextIndex < 0;
-    setAttribute(prev, ARIA_LABEL, prevLabel);
-    setAttribute(next, ARIA_LABEL, nextLabel);
-    emit(EVENT_ARROWS_UPDATED, prev, next, prevIndex, nextIndex);
+    if (prev && next) {
+      var index = Splide2.index;
+      var prevIndex = Controller.getPrev();
+      var nextIndex = Controller.getNext();
+      var prevLabel = prevIndex > -1 && index < prevIndex ? i18n.last : i18n.prev;
+      var nextLabel = nextIndex > -1 && index > nextIndex ? i18n.first : i18n.next;
+      prev.disabled = prevIndex < 0;
+      next.disabled = nextIndex < 0;
+      setAttribute(prev, ARIA_LABEL, prevLabel);
+      setAttribute(next, ARIA_LABEL, nextLabel);
+      emit(EVENT_ARROWS_UPDATED, prev, next, prevIndex, nextIndex);
+    }
   }
 
   return {
     arrows: arrows,
     mount: mount,
-    destroy: destroy
+    destroy: destroy,
+    update: update
   };
 }
 
 var INTERVAL_DATA_ATTRIBUTE = DATA_ATTRIBUTE + "-interval";
 
 function Autoplay(Splide2, Components2, options) {
-  var _EventInterface7 = EventInterface(Splide2),
-      on = _EventInterface7.on,
-      bind = _EventInterface7.bind,
-      emit = _EventInterface7.emit;
+  var _EventInterface6 = EventInterface(Splide2),
+      on = _EventInterface6.on,
+      bind = _EventInterface6.bind,
+      emit = _EventInterface6.emit;
 
   var interval = RequestInterval(options.interval, Splide2.go.bind(Splide2, ">"), onAnimationFrame);
   var isPaused = interval.isPaused;
@@ -2057,8 +2083,8 @@ function Autoplay(Splide2, Components2, options) {
 }
 
 function Cover(Splide2, Components2, options) {
-  var _EventInterface8 = EventInterface(Splide2),
-      on = _EventInterface8.on;
+  var _EventInterface7 = EventInterface(Splide2),
+      on = _EventInterface7.on;
 
   function mount() {
     if (options.cover) {
@@ -2095,9 +2121,9 @@ var BASE_VELOCITY = 1.5;
 var MIN_DURATION = 800;
 
 function Scroll(Splide2, Components2, options) {
-  var _EventInterface9 = EventInterface(Splide2),
-      on = _EventInterface9.on,
-      emit = _EventInterface9.emit;
+  var _EventInterface8 = EventInterface(Splide2),
+      on = _EventInterface8.on,
+      emit = _EventInterface8.emit;
 
   var set = Splide2.state.set;
   var Move = Components2.Move;
@@ -2105,6 +2131,7 @@ function Scroll(Splide2, Components2, options) {
       getLimit = Move.getLimit,
       exceededLimit = Move.exceededLimit,
       translate = Move.translate;
+  var isSlide = Splide2.is(SLIDE);
   var interval;
   var callback;
   var friction = 1;
@@ -2118,7 +2145,7 @@ function Scroll(Splide2, Components2, options) {
     var from = getPosition();
     clear();
 
-    if (snap) {
+    if (snap && (!isSlide || !exceededLimit())) {
       var size = Components2.Layout.sliderSize();
       var offset = sign(destination) * size * floor(abs(destination) / size) || 0;
       destination = Move.toPosition(Components2.Controller.toDest(destination % size)) + offset;
@@ -2146,7 +2173,7 @@ function Scroll(Splide2, Components2, options) {
     var diff = (target - position) * friction;
     translate(position + diff);
 
-    if (Splide2.is(SLIDE) && !noConstrain && exceededLimit()) {
+    if (isSlide && !noConstrain && exceededLimit()) {
       friction *= FRICTION_FACTOR;
 
       if (abs(diff) < BOUNCE_DIFF_THRESHOLD) {
@@ -2187,11 +2214,11 @@ var SCROLL_LISTENER_OPTIONS = {
 };
 
 function Drag(Splide2, Components2, options) {
-  var _EventInterface10 = EventInterface(Splide2),
-      on = _EventInterface10.on,
-      emit = _EventInterface10.emit,
-      bind = _EventInterface10.bind,
-      unbind = _EventInterface10.unbind;
+  var _EventInterface9 = EventInterface(Splide2),
+      on = _EventInterface9.on,
+      emit = _EventInterface9.emit,
+      bind = _EventInterface9.bind,
+      unbind = _EventInterface9.unbind;
 
   var state = Splide2.state;
   var Move = Components2.Move,
@@ -2415,10 +2442,10 @@ function normalizeKey(key) {
 var KEYBOARD_EVENT = "keydown";
 
 function Keyboard(Splide2, Components2, options) {
-  var _EventInterface11 = EventInterface(Splide2),
-      on = _EventInterface11.on,
-      bind = _EventInterface11.bind,
-      unbind = _EventInterface11.unbind;
+  var _EventInterface10 = EventInterface(Splide2),
+      on = _EventInterface10.on,
+      bind = _EventInterface10.bind,
+      unbind = _EventInterface10.unbind;
 
   var root = Splide2.root;
   var resolve = Components2.Direction.resolve;
@@ -2481,26 +2508,37 @@ var SRCSET_DATA_ATTRIBUTE = SRC_DATA_ATTRIBUTE + "-srcset";
 var IMAGE_SELECTOR = "[" + SRC_DATA_ATTRIBUTE + "], [" + SRCSET_DATA_ATTRIBUTE + "]";
 
 function LazyLoad(Splide2, Components2, options) {
-  var _EventInterface12 = EventInterface(Splide2),
-      on = _EventInterface12.on,
-      off = _EventInterface12.off,
-      bind = _EventInterface12.bind,
-      emit = _EventInterface12.emit;
+  var _EventInterface11 = EventInterface(Splide2),
+      on = _EventInterface11.on,
+      off = _EventInterface11.off,
+      bind = _EventInterface11.bind,
+      emit = _EventInterface11.emit;
 
   var isSequential = options.lazyLoad === "sequential";
-  var events = [EVENT_MOUNTED, EVENT_REFRESH, EVENT_MOVED, EVENT_SCROLLED];
+  var events = [EVENT_MOVED, EVENT_SCROLLED];
   var entries = [];
 
   function mount() {
     if (options.lazyLoad) {
       init();
       on(EVENT_REFRESH, init);
-      isSequential || on(events, observe);
     }
   }
 
   function init() {
     empty(entries);
+    register();
+
+    if (isSequential) {
+      loadNext();
+    } else {
+      off(events);
+      on(events, check);
+      check();
+    }
+  }
+
+  function register() {
     Components2.Slides.forEach(function (Slide) {
       queryAll(Slide.slide, IMAGE_SELECTOR).forEach(function (img) {
         var src = getAttribute(img, SRC_DATA_ATTRIBUTE);
@@ -2515,10 +2553,9 @@ function LazyLoad(Splide2, Components2, options) {
         }
       });
     });
-    isSequential && loadNext();
   }
 
-  function observe() {
+  function check() {
     entries = entries.filter(function (data) {
       var distance = options.perPage * ((options.preloadPages || 1) + 1) - 1;
       return data[1].isWithin(Splide2.index, distance) ? load(data) : true;
@@ -2557,7 +2594,8 @@ function LazyLoad(Splide2, Components2, options) {
 
   return {
     mount: mount,
-    destroy: apply(empty, entries)
+    destroy: apply(empty, entries),
+    check: check
   };
 }
 
@@ -2573,15 +2611,18 @@ function Pagination(Splide2, Components2, options) {
       getIndex = Controller.getIndex,
       go = Controller.go;
   var resolve = Components2.Direction.resolve;
+  var placeholder = Elements.pagination;
   var items = [];
   var list;
   var paginationClasses;
 
   function mount() {
     destroy();
-    on([EVENT_UPDATED, EVENT_REFRESH], mount);
+    on([EVENT_UPDATED, EVENT_REFRESH, EVENT_END_INDEX_CHANGED], mount);
+    var enabled = options.pagination;
+    placeholder && display(placeholder, enabled ? "" : "none");
 
-    if (options.pagination && Slides.isEnough()) {
+    if (enabled) {
       on([EVENT_MOVE, EVENT_SCROLL, EVENT_SCROLLED], update);
       createPagination();
       update();
@@ -2594,7 +2635,7 @@ function Pagination(Splide2, Components2, options) {
 
   function destroy() {
     if (list) {
-      remove(Elements.pagination ? slice(list.children) : list);
+      remove(placeholder ? slice(list.children) : list);
       removeClass(list, paginationClasses);
       empty(items);
       list = null;
@@ -2608,8 +2649,8 @@ function Pagination(Splide2, Components2, options) {
     var classes = options.classes,
         i18n = options.i18n,
         perPage = options.perPage;
-    var max = hasFocus() ? length : ceil(length / perPage);
-    list = Elements.pagination || create("ul", classes.pagination, Elements.track.parentElement);
+    var max = hasFocus() ? Controller.getEnd() + 1 : ceil(length / perPage);
+    list = placeholder || create("ul", classes.pagination, Elements.track.parentElement);
     addClass(list, paginationClasses = CLASS_PAGINATION + "--" + getDirection());
     setAttribute(list, ROLE, "tablist");
     setAttribute(list, ARIA_LABEL, i18n.select);
@@ -2721,12 +2762,6 @@ function Sync(Splide2, Components2, options) {
       slideFocus = options.slideFocus;
   var events = [];
 
-  function setup() {
-    Splide2.options = {
-      slideFocus: isUndefined(slideFocus) ? isNavigation : slideFocus
-    };
-  }
-
   function mount() {
     Splide2.splides.forEach(function (target) {
       if (!target.isParent) {
@@ -2786,7 +2821,9 @@ function Sync(Splide2, Components2, options) {
   }
 
   return {
-    setup: setup,
+    setup: apply(Components2.Media.set, {
+      slideFocus: isUndefined(slideFocus) ? isNavigation : slideFocus
+    }, true),
     mount: mount,
     destroy: destroy,
     remount: remount
@@ -2794,8 +2831,8 @@ function Sync(Splide2, Components2, options) {
 }
 
 function Wheel(Splide2, Components2, options) {
-  var _EventInterface13 = EventInterface(Splide2),
-      bind = _EventInterface13.bind;
+  var _EventInterface12 = EventInterface(Splide2),
+      bind = _EventInterface12.bind;
 
   var lastTime = 0;
 
@@ -2836,8 +2873,8 @@ function Wheel(Splide2, Components2, options) {
 var SR_REMOVAL_DELAY = 90;
 
 function Live(Splide2, Components2, options) {
-  var _EventInterface14 = EventInterface(Splide2),
-      on = _EventInterface14.on;
+  var _EventInterface13 = EventInterface(Splide2),
+      on = _EventInterface13.on;
 
   var track = Components2.Elements.track;
   var enabled = options.live && !options.isNavigation;
@@ -2863,6 +2900,7 @@ function Live(Splide2, Components2, options) {
       interval.start();
     } else {
       remove(sr);
+      interval.cancel();
     }
   }
 
@@ -2949,24 +2987,21 @@ var DEFAULTS = {
 };
 
 function Fade(Splide2, Components2, options) {
-  var _EventInterface15 = EventInterface(Splide2),
-      on = _EventInterface15.on;
+  var Slides = Components2.Slides;
 
   function mount() {
-    on([EVENT_MOUNTED, EVENT_REFRESH], function () {
-      nextTick(function () {
-        Components2.Slides.style("transition", "opacity " + options.speed + "ms " + options.easing);
-      });
+    EventInterface(Splide2).on([EVENT_MOUNTED, EVENT_REFRESH], init);
+  }
+
+  function init() {
+    Slides.forEach(function (Slide) {
+      Slide.style("transform", "translateX(-" + 100 * Slide.index + "%)");
     });
   }
 
   function start(index, done) {
-    var track = Components2.Elements.track;
-    style(track, "height", unit(rect(track).height));
-    nextTick(function () {
-      done();
-      style(track, "height", "");
-    });
+    Slides.style("transition", "opacity " + options.speed + "ms " + options.easing);
+    nextTick(done);
   }
 
   return {
@@ -2977,9 +3012,6 @@ function Fade(Splide2, Components2, options) {
 }
 
 function Slide(Splide2, Components2, options) {
-  var _EventInterface16 = EventInterface(Splide2),
-      bind = _EventInterface16.bind;
-
   var Move = Components2.Move,
       Controller = Components2.Controller,
       Scroll = Components2.Scroll;
@@ -2988,7 +3020,7 @@ function Slide(Splide2, Components2, options) {
   var endCallback;
 
   function mount() {
-    bind(list, "transitionend", function (e) {
+    EventInterface(Splide2).bind(list, "transitionend", function (e) {
       if (e.target === list && endCallback) {
         cancel();
         endCallback();
@@ -3189,7 +3221,7 @@ var _Splide = /*#__PURE__*/function () {
       return this._o;
     },
     set: function set(options) {
-      this._C.Media.set(options, true);
+      this._C.Media.set(options, true, true);
     }
   }, {
     key: "length",
@@ -3289,8 +3321,8 @@ var SplideRenderer = /*#__PURE__*/function () {
   }
 
   SplideRenderer.clean = function clean(splide) {
-    var _EventInterface17 = EventInterface(splide),
-        on = _EventInterface17.on;
+    var _EventInterface14 = EventInterface(splide),
+        on = _EventInterface14.on;
 
     var root = splide.root;
     var clones = queryAll(root, "." + CLASS_CLONE);
@@ -3733,21 +3765,6 @@ var SplideRenderer = /*#__PURE__*/function () {
 
 
 
-/***/ }),
-
-/***/ "./src/javascript/modules.js":
-/*!***********************************!*\
-  !*** ./src/javascript/modules.js ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-var module = "this is a moduleasd";
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (module);
-
 /***/ })
 
 /******/ 	});
@@ -3809,28 +3826,31 @@ var module = "this is a moduleasd";
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!********************************!*\
-  !*** ./src/javascript/main.js ***!
-  \********************************/
+/*!*************************************!*\
+  !*** ./src/javascript/servicios.js ***!
+  \*************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _splidejs_splide__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @splidejs/splide */ "./node_modules/@splidejs/splide/dist/js/splide.esm.js");
-/* harmony import */ var _modules__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules */ "./src/javascript/modules.js");
 
- // A dog
-
-var dog = "Manolo"; // An array of dogs
-
-var dogs = ["Melbaaaa"]; // Push to that array
-
-dogs.push(dog);
-console.log(_modules__WEBPACK_IMPORTED_MODULE_1__["default"]);
-var carousel = new _splidejs_splide__WEBPACK_IMPORTED_MODULE_0__["default"](".splide").mount(); // const today = dayjs.get("date")
-// console.log(today);
-// Log the result
-
-console.log(dogs);
+var carouselElement = document.querySelector("#serviciosCarousel");
+window.addEventListener("load", function () {
+  console.log("servicios.js init");
+  var carouselConfig = {
+    type: "loop",
+    perPage: 1,
+    perMove: 1,
+    gap: "1rem",
+    mediaQuery: "min",
+    breakpoints: {
+      768: {
+        perPage: 3
+      }
+    }
+  };
+  var carousel = new _splidejs_splide__WEBPACK_IMPORTED_MODULE_0__.Splide(carouselElement, carouselConfig).mount();
+});
 })();
 
 /******/ })()
 ;
-//# sourceMappingURL=main.js.map
+//# sourceMappingURL=servicios.js.map
