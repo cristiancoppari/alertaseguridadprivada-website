@@ -5,7 +5,8 @@ module.exports = {
 
   entry: {
     servicios: "./src/javascript/servicios.js",
-    // modules: "./src/javascript/modules.js",
+    rrhh: "./src/javascript/rrhh.js",
+    // servicios: "./src/javascript/contacto.js",
   },
 
   output: {
