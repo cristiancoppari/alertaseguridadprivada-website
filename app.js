@@ -13,7 +13,7 @@ var app = express();
 app.set('views', path.join(__dirname, "src", 'views'));
 app.set('view engine', 'twig');
 
-app.use(compression());
+// app.use(compression());
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
