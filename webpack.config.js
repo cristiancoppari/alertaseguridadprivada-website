@@ -6,7 +6,7 @@ module.exports = {
   entry: {
     servicios: "./src/javascript/servicios.js",
     rrhh: "./src/javascript/rrhh.js",
-    // servicios: "./src/javascript/contacto.js",
+    contacto: "./src/javascript/contacto.js",
   },
 
   output: {

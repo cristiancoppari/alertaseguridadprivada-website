@@ -11,10 +11,10 @@
       <p>{{ text }}</p>
     {% endfor %}
 
-    <form class="row g-3">
+    <form class="row g-3" id="contactoForm">
       <div class="col-md-6">
         <label for="inputNombreApellido" class="form-label">Nombre y Apellido <span class="required">*</span></label>
-        <input type="text" class="form-control" id="inputNombreApellido" placeholder="Ej: Quique Necochea">
+        <input type="text" class="form-control" id="inputNombreApellido" placeholder="Ej: Esteban Lopez">
       </div>
       <div class="col-md-6">
         <label for="inputCompania" class="form-label">Compañia</label>
@@ -22,7 +22,7 @@
       </div>
       <div class="col-12">
         <label for="inputEmail" class="form-label">Email <span class="required">*</span></label>
-        <input type="email" class="form-control" id="inputEmail" placeholder="quiquenecochea_ok@gmail.com">
+        <input type="email" class="form-control" id="inputEmail" placeholder="esteban.lopez@gmail.com">
       </div>
       <div class="col-12">
         <label for="inputTelefono" class="form-label">Teléfono <span class="required">*</span></label>
@@ -30,7 +30,7 @@
       </div>
       <div class="col-md-6">
         <label for="inputLocalidad" class="form-label">Localidad</label>
-        <input type="text" class="form-control" id="inputLocalidad" placeholder="Ej: Quique Necochea">
+        <input type="text" class="form-control" id="inputLocalidad" placeholder="Ej: Capital Federal">
       </div>
       <div class="col-md-6">
         <label for="inputCotizacion" class="form-label">Cotización</label>
@@ -38,6 +38,7 @@
           {# <option selected>Cotización</option> #}
           <option value="Opcion 1">Opción 1</option>
           <option value="Opcion 2">Opción 2</option>
+          <option value="Opcion 3">Opción 3</option>
         </select>
       </div>
       <div class="col-12">
