@@ -70,7 +70,8 @@ window.addEventListener("load", () => {
         .onSuccess((e) => {
             console.log("validation pass")
 
-            fetch("https://alertas-stage.herokuapp.com/api/send-email-contacto", {
+            // fetch("https://alertas-stage.herokuapp.com/api/send-email-contacto", {
+            fetch("http://localhost:5001/api/send-email-contacto", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -85,7 +86,7 @@ window.addEventListener("load", () => {
                 .then((response) => {
                     console.log(response.status)
                     if (response.status === 200) {
-                        console.log("200")
+                        location.href = "/"
                     }
                 })
                 .catch((error) => console.log(error))

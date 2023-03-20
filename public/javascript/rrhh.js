@@ -1662,6 +1662,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var just_validate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! just-validate */ "./node_modules/just-validate/dist/just-validate.es.js");
 
 var rrhhForm = document.querySelector("#rrhhForm");
+var inputNombreApellido = document.querySelector("#inputNombreApellido");
+var inputEmail = document.querySelector("#inputEmail");
+var inputTelefono = document.querySelector("#inputTelefono");
+var inputCV = document.querySelector("#inputCV");
 window.addEventListener("load", function () {
   console.log("rrhh init");
   var validator = new just_validate__WEBPACK_IMPORTED_MODULE_0__["default"]("#rrhhForm", {
@@ -1714,11 +1718,25 @@ window.addEventListener("load", function () {
   }]).onFail(function (e) {
     return console.log(e);
   }).onSuccess(function (e) {
-    return console.log(e);
-  });
-  rrhhForm.addEventListener("submit", function (e) {
-    console.log("form submitted");
-    e.preventDefault();
+    // Create a FormData object
+    var formData = new FormData();
+
+    // Append the form fields to the FormData object
+    formData.append('name', inputNombreApellido.value);
+    formData.append('email', inputEmail.value);
+    formData.append('phone', inputTelefono.value);
+    formData.append('file', inputCV.files[0]);
+    fetch("http://localhost:5001/api/send-email-rrhh", {
+      method: "POST",
+      body: formData
+    }).then(function (response) {
+      console.log(response.status);
+      if (response.status === 200) {
+        location.href = "/";
+      }
+    })["catch"](function (error) {
+      return console.log(error);
+    });
   });
 });
 })();

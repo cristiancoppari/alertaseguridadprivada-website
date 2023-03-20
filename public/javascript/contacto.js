@@ -1706,7 +1706,9 @@ window.addEventListener("load", function () {
     console.log("validation fail");
   }).onSuccess(function (e) {
     console.log("validation pass");
-    fetch("https://alertas-stage.herokuapp.com/api/send-email-contacto", {
+
+    // fetch("https://alertas-stage.herokuapp.com/api/send-email-contacto", {
+    fetch("http://localhost:5001/api/send-email-contacto", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -1720,7 +1722,7 @@ window.addEventListener("load", function () {
     }).then(function (response) {
       console.log(response.status);
       if (response.status === 200) {
-        console.log("200");
+        location.href = "/";
       }
     })["catch"](function (error) {
       return console.log(error);

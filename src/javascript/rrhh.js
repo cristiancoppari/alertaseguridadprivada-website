@@ -1,6 +1,10 @@
 import JustValidate from "just-validate";
 
 const rrhhForm = document.querySelector("#rrhhForm");
+const inputNombreApellido = document.querySelector("#inputNombreApellido");
+const inputEmail = document.querySelector("#inputEmail");
+const inputTelefono = document.querySelector("#inputTelefono");
+const inputCV = document.querySelector("#inputCV");
 
 window.addEventListener("load", () => {
     console.log("rrhh init")
@@ -76,10 +80,26 @@ window.addEventListener("load", () => {
             }
         ])
         .onFail((e) => console.log(e))
-        .onSuccess((e) => console.log(e))
+        .onSuccess((e) => {
+            // Create a FormData object
+            const formData = new FormData();
 
-    rrhhForm.addEventListener("submit", (e) => {
-        console.log("form submitted");
-        e.preventDefault();
-    })
+            // Append the form fields to the FormData object
+            formData.append('name', inputNombreApellido.value);
+            formData.append('email', inputEmail.value);
+            formData.append('phone', inputTelefono.value);
+            formData.append('file', inputCV.files[0]);
+
+            fetch("http://localhost:5001/api/send-email-rrhh", {
+                method: "POST",
+                body: formData
+            })
+                .then((response) => {
+                    console.log(response.status)
+                    if (response.status === 200) {
+                        location.href = "/"
+                    }
+                })
+                .catch((error) => console.log(error))
+        })
 })
