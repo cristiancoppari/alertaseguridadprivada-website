@@ -137,7 +137,7 @@ router.post("/send-email-rrhh", upload.any(), (req, res) => {
       const result = await transporter.sendMail(mailOptions);
       const resultLead = await transporter.sendMail(mailOptionsLead);
       console.log("Email sent to info", result.response);
-      console.log("Email sent to lead", result.response);
+      console.log("Email sent to lead", resultLead.response);
     } catch (error) {
       console.log("Failed to send email:", error)
     }
