@@ -1,6 +1,10 @@
 import JustValidate from "just-validate";
 
 const contactoForm = document.querySelector("#contactoForm");
+const inputNombreApellido = document.querySelector("#inputNombreApellido");
+const inputEmail = document.querySelector("#inputEmail");
+const inputTelefono = document.querySelector("#inputTelefono");
+const inputMensaje = document.querySelector("#inputMensaje");
 
 window.addEventListener("load", () => {
     console.log("contacto init")
@@ -60,11 +64,30 @@ window.addEventListener("load", () => {
                 errorMessage: "Este campo no puede estar vacío"
             }
         ])
-        .onFail((e) => console.log(e))
-        .onSuccess((e) => console.log(e))
+        .onFail((e) => {
+            console.log("validation fail")
+        })
+        .onSuccess((e) => {
+            console.log("validation success")
 
-    contactoForm.addEventListener("submit", (e) => {
-        console.log("form submitted");
-        e.preventDefault();
-    })
+            fetch("http://localhost:5001/api/send-email-contacto", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: inputNombreApellido.value,
+                    email: inputEmail.value,
+                    phone: inputTelefono.value,
+                    message: inputMensaje.value
+                })
+            })
+                .then((response) => {
+                    console.log(response.status)
+                    if (response.status === 200) {
+                        console.log("200")
+                    }
+                })
+                .catch((error) => console.log(error))
+        })
 })

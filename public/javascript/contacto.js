@@ -1662,6 +1662,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var just_validate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! just-validate */ "./node_modules/just-validate/dist/just-validate.es.js");
 
 var contactoForm = document.querySelector("#contactoForm");
+var inputNombreApellido = document.querySelector("#inputNombreApellido");
+var inputEmail = document.querySelector("#inputEmail");
+var inputTelefono = document.querySelector("#inputTelefono");
+var inputMensaje = document.querySelector("#inputMensaje");
 window.addEventListener("load", function () {
   console.log("contacto init");
   var validator = new just_validate__WEBPACK_IMPORTED_MODULE_0__["default"]("#contactoForm", {
@@ -1699,13 +1703,28 @@ window.addEventListener("load", function () {
     rule: "required",
     errorMessage: "Este campo no puede estar vacío"
   }]).onFail(function (e) {
-    return console.log(e);
+    console.log("validation fail");
   }).onSuccess(function (e) {
-    return console.log(e);
-  });
-  contactoForm.addEventListener("submit", function (e) {
-    console.log("form submitted");
-    e.preventDefault();
+    console.log("validation success");
+    fetch("http://localhost:5001/api/send-email-contacto", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: inputNombreApellido.value,
+        email: inputEmail.value,
+        phone: inputTelefono.value,
+        message: inputMensaje.value
+      })
+    }).then(function (response) {
+      console.log(response.status);
+      if (response.status === 200) {
+        console.log("200");
+      }
+    })["catch"](function (error) {
+      return console.log(error);
+    });
   });
 });
 })();

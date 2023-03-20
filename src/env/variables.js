@@ -1,0 +1,15 @@
+const dotenv = require('dotenv').config();
+
+const EMAIL = process.env.EMAIL_SENDER;
+const GOOGLE_OAUTH2_ID = process.env.GOOGLE_OAUTH2_ID;
+const GOOGLE_OAUTH2_SECRET = process.env.GOOGLE_OAUTH2_SECRET;
+const GOOGLE_OAUTH2_REFRESH_TOKEN = process.env.GOOGLE_OAUTH2_REFRESH_TOKEN;
+const GOOGLE_OAUTH2_REDIRECT_URI = process.env.GOOGLE_OAUTH2_REDIRECT_URI;
+
+module.exports = {
+    EMAIL,
+    GOOGLE_OAUTH2_ID,
+    GOOGLE_OAUTH2_SECRET,
+    GOOGLE_OAUTH2_REFRESH_TOKEN,
+    GOOGLE_OAUTH2_REDIRECT_URI
+}
