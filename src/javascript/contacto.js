@@ -68,7 +68,7 @@ window.addEventListener("load", () => {
             console.log("validation fail")
         })
         .onSuccess((e) => {
-            console.log("validation success")
+            console.log("validation pass")
 
             fetch("https://alertas-stage.herokuapp.com/api/send-email-contacto", {
                 method: "POST",
