@@ -70,8 +70,7 @@ window.addEventListener("load", () => {
         .onSuccess((e) => {
             console.log("validation pass")
 
-            // fetch("https://alertas-stage.herokuapp.com/api/send-email-contacto", {
-            fetch("http://localhost:5001/api/send-email-contacto", {
+            fetch("https://alertas-stage.herokuapp.com/api/send-email-contacto", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

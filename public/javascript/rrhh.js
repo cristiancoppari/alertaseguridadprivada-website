@@ -1726,7 +1726,7 @@ window.addEventListener("load", function () {
     formData.append('email', inputEmail.value);
     formData.append('phone', inputTelefono.value);
     formData.append('file', inputCV.files[0]);
-    fetch("http://localhost:5001/api/send-email-rrhh", {
+    fetch("https://alertas-stage.herokuapp.com/api/send-email-rrhh", {
       method: "POST",
       body: formData
     }).then(function (response) {
