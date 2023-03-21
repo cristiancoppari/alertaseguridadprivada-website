@@ -1,17 +1,17 @@
 section:not(.hero) {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
 }
 
 .alertas-background {
-  background: url("/images/fondo-nosotros.jpg");
-  background-position: center;
-  background-size: cover;
+    background: url("/images/fondo-nosotros.jpg");
+    background-position: center;
+    background-size: cover;
 
-  h2,
-  p {
-    color: $white;
-  }
+    h2,
+    p {
+        color: $white;
+    }
 }
 
 // .alertas-background {
@@ -29,33 +29,33 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: $font-primary;
-  color: $gray;
+    font-family: $font-primary;
+    color: $gray;
 
-  letter-spacing: 1px;
+    letter-spacing: 1px;
 }
 
 h1 {
-  font-weight: 300;
+    font-weight: 300;
 
-  @include media-breakpoint-up(lg) {
-    font-size: 3rem;
-  }
+    @include media-breakpoint-up(lg) {
+        font-size: 2.5rem;
+    }
 }
 
 h2 {
-  font-size: 1.5rem;
-  font-weight: 400;
+    font-size: 1.5rem;
+    font-weight: 400;
 
-  @include media-breakpoint-up(lg) {
-    font-size: 2.5rem;
-  }
+    @include media-breakpoint-up(lg) {
+        font-size: 2.5rem;
+    }
 }
 
 p {
-  font-family: $font-secondary;
-  font-weight: 300;
-  color: $gray;
+    font-family: $font-secondary;
+    font-weight: 300;
+    color: $gray;
 
-  letter-spacing: 1px;
+    letter-spacing: 1px;
 }

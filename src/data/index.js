@@ -8,7 +8,8 @@ const indexData = {
   header,
 
   hero: {
-    title: "LA MEJOR SOLUCIÓN <br> EN <strong>VIGILANCIA.</strong>",
+    title: "ALERTAS SEGURIDAD PRIVADA",
+    subtitle: "La mejor solución en <strong>vigilancia.</strong>",
 
     classes: "home",
 
@@ -16,7 +17,7 @@ const indexData = {
       mobile: "/images/hero-home.png",
       tablet: "/images/hero-home.png",
       desktop: "/images/hero-home.png",
-      desktopXL: "/images/hero-home-desktopxl.jpg",
+      desktopXL: "/images/hero-home.png",
     },
 
     cta: {
@@ -30,7 +31,7 @@ const indexData = {
     title: "Calidad <br>Seguridad <br>Compromiso",
 
     text: [
-      "Alertas Seguridad Privada. Experiencia, responsabilidad y confiabilidad, puesta al servicio de su seguridad."
+      "Alertas Seguridad Privada. Experiencia responsabilidad y confiabilidad, puesta al servicio de su seguridad."
     ],
 
     image: "/images/services.png"
@@ -40,7 +41,7 @@ const indexData = {
     title: "Estamos <br>para ayudarte",
 
     text: [
-      "Comunicate con nosotros llamando a nuestro teléfono, enviando un mensaje por WhatsApp o sino, envianos tu consulta completando el formulario, para que uno de nuestros asesores se ponga en contacto"
+      "Podes comunicarte con nosotros llamando a nuestras líneas telefónicas, enviándonos un WhatsApp o completando el formulario para que uno de nuestros asesores se ponga en contacto."
     ],
 
     image: "/images/security-guard.png",

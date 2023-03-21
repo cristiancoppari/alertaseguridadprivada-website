@@ -10,6 +10,8 @@
     <div class="title-cta-wrapper">
       <div class="title-cta-content container">
         <h1>{{ hero.title }}</h1>
+        {% if hero.subtitle %}<h2>{{hero.subtitle}}</h2>{% endif %}
+        
         {# <h1>LA MEJOR SOLUCIÓN <br> EN <strong>VIGILANCIA.</strong></h1> #}
         
         {% if hero.cta %}
