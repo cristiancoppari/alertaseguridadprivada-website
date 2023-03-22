@@ -14,7 +14,7 @@ const indexData = {
 
     body: [
       "<strong>¡Estamos para ayudarte!</strong>",
-      "Comunícate con nosotros llamando a nuestro teléfono, enviando un mensaje por whatsapp o sino, envianos tu consulta completando el formulario, para que uno de nuestros asesores se ponga en contacto.",
+      "Envíanos tu consulta o solicitud completando el formulario. También podés comunicarte llamando a los números de contacto o enviarnos un WhatsApp a la línea exclusiva para mensajes, así un representante se contactará a la brevedad.",
       "Para cotizaciones, por favor seleccioná el Servcio que desees contratar."
     ]
   }

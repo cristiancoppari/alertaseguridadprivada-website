@@ -20,10 +20,9 @@ const indexData = {
     title: "Acerca de <strong>Alertas</strong> <br> Seguridad Privada",
 
     body: [
-      "Somos una empresa formada por expertos en seguridad con <strong>más de 25 años de trayectoria</strong> en el mercado.",
-      "Nuestra mayor virtud es saber entender a nuestros clientes, detectando de esta manera sus necesidades en concepto de seguridad, para poder brindarles la mejor alternativa a la hora de ofrecer nuestro servicio.",
-      "Para lograrlo, contamos con un grupo de profesionales capacitados y debidamente elegidos por nuestro personal de RRHH.",
-      "Experiencia, responsabilidad y confiabilidad, puesta al servicio de su seguridad."
+      "Somos una empresa de seguridad privada especializada en vigilancia, prevención y protección de bienes; fundada hace más de veinte años por expertos en la materia, con alta experiencia desde los años 90 en el rubro.",
+      "Nuestro principal compromiso es identificar las reales necesidades de los clientes a la hora de contratar nuestro servicio de seguridad privada.  Esto nos permite poder ofrecer un servicio a la altura de las expectativas que desean.",
+      "Para lograrlo, contamos con un grupo de trabajadores altamente seleccionados y capacitados por nuestros profesionales, que cuentan con las herramientas necesarias para poder llevar a cabo los mejores procesos de selección del personal.",
     ],
 
     cta: {
@@ -38,8 +37,8 @@ const indexData = {
     image: "/images/services.png",
 
     text: [
-      "Capacitamos a nuestro personal mediente el entrenamiento constante y los cursos requeridos para poder afrontar diferentes situaciones con la mejor eficacia posible.",
-      "Le exigimos a nuestro equipo la maxima atención, cordialidad y respeto para así poder brindar un mejor servicio."
+      "Capacitamos a nuestro personal de vigilancia mediante el entrenamiento constante y los cursos requeridos para poder cumplir con sus tareas con mayor eficacia.",
+      "Le exigimos a nuestro equipo la máxima atención, compromiso, cordialidad y respeto a la hora de desempeñar sus tareas."
     ]
   },
 
@@ -47,7 +46,7 @@ const indexData = {
     title: "Estamos <br>para ayudarte",
 
     text: [
-      "Comunicate con nosotros llamando a nuestro teléfono, enviando un mensaje por WhatsApp o sino, envianos tu consulta completando el formulario, para que uno de nuestros asesores se ponga en contacto"
+      "Podes comunicarte con nosotros llamando a nuestras líneas telefónicas, enviándonos un WhatsApp o completando el formulario para que uno de nuestros asesores se ponga en contacto."
     ],
 
     image: "/images/security-guard.png",

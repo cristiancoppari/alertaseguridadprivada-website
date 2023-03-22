@@ -65,22 +65,22 @@ const serviciosData = {
       {
         number: "01",
         label: "Detección",
-        text: "Cada cliente o propiedad privada cuenta con diferentes necesidades a la hora de requerir un servicio de seguridad privada; nosotros las detectamos y buscamos la mejor solución.",
+        text: "Cada cliente o propiedad privada cuenta con diferentes necesidades a la hora de requerir un servicio de seguridad; nosotros analizamos, detectamos y brindamos la solución.",
       },
       {
         number: "02",
         label: "Recepción",
-        text: "Una vez recibidas las inquietudes de nuestros clientes, nuestros asesores las trasladarán al equipo de trabajo para poder satisfacerlos y por sobre todo, se sientan protegidos.",
+        text: "Una vez recibidas las pretensiones de los clientes, nuestros asesores las trasladarán al equipo de trabajo para poder satisfacerlos y por, sobre todo, que se sientan protegidos.",
       },
       {
         number: "03",
         label: "Prevención",
-        text: "Otorgando un protocolo de seguridad adaptable a cada necesidad, instruimos a nuestro personal para prevenir cualquier situación de riesgo dentro de la propiedad privada.",
+        text: "Nuestro personal es instruido para poder cumplimentar con los protocolos de seguridad que se requieran según las necesidades de nuestros clientes y así prevenir y disminuir cualquier situación de riesgo.",
       },
       {
         number: "04",
         label: "Respuesta",
-        text: "Nuestro equipo de guardias se encuentra preparado para afrontar diferentes tareas con mayor eficacia gracias a las normas y las pautas establecidas, dando respuesta a la brevedad.",
+        text: "Nuestro equipo de guardias se encuentra preparado para afrontar diferentes tareas y dar respuestas de manera eficaz, basándonos en las estrictas normas y pautas establecidas.",
       }
     ]
   },

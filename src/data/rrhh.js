@@ -13,7 +13,7 @@ const indexData = {
     title: "<strong>R.R.H.H</strong> | ¡Sumate al equipo!",
 
     body: [
-      "Nuestro propósito es lograr que nuestros empleados se sientan orgullosos de pertenecer a Alertas Seguridad Privada.Si sos proactivo y responsable, y estás interesado en ser parte de nuestro equipo, completa el formulario y postúlate para formar parte de nuestro staff.",
+      "Si estás interesado en formar parte de la empresa completá el formulario de abajo y adjunta tu Currículum. El mismo será evaluado y en caso de precisarlo nos pondremos en contacto.",
       "No olvides de adjuntarnos tu C.V., haciendo click en el botón <strong>seleccionar archivo</strong>, situado en el formulario.",
     ]
   },

@@ -25,7 +25,7 @@ const { GOOGLE_OAUTH2_ID, GOOGLE_OAUTH2_SECRET, GOOGLE_OAUTH2_REDIRECT_URI, GOOG
 // Contacto
 router.post("/send-email-contacto", (req, res) => {
   // console.log("body", req.body)
-  const { name, email, phone, message } = req.body;
+  const { name, email, phone, message, state, company } = req.body;
 
   const OAuth2Client = new google.auth.OAuth2(GOOGLE_OAUTH2_ID, GOOGLE_OAUTH2_SECRET, GOOGLE_OAUTH2_REDIRECT_URI);
 
@@ -56,7 +56,9 @@ router.post("/send-email-contacto", (req, res) => {
         <p>Nombre: ${name}</p>
         <p>Email: ${email}</p>
         <p>Teléfono: ${phone}</p>
-        <p>Mensaje: ${message}</p>`
+        <p>Mensaje: ${message}</p>
+        <p>Localidad: ${state}</p>
+        <p>Compañia: ${company}</p>`
       }
 
       const mailOptionsLead = {
@@ -84,7 +86,7 @@ router.post("/send-email-contacto", (req, res) => {
 
 router.post("/send-email-rrhh", upload.any(), (req, res) => {
   // console.log("body", req.body)
-  const { name, email, phone } = req.body;
+  const { name, email, phone, howYouKnowUs } = req.body;
   const [file] = req.files;
 
   const OAuth2Client = new google.auth.OAuth2(GOOGLE_OAUTH2_ID, GOOGLE_OAUTH2_SECRET, GOOGLE_OAUTH2_REDIRECT_URI);
@@ -115,7 +117,8 @@ router.post("/send-email-rrhh", upload.any(), (req, res) => {
         <h1>Información del contacto</h1>
         <p>Nombre: ${name}</p>
         <p>Email: ${email}</p>
-        <p>Teléfono: ${phone}</p>`,
+        <p>Teléfono: ${phone}</p>
+        <p>¿Cómo nos conociste?: ${howYouKnowUs}</p>`,
         attachments: [
           {
             filename: file.originalname,

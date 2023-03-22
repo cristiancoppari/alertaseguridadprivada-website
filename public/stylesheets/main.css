@@ -11321,7 +11321,7 @@ p {
 }
 @media (min-width: 992px) {
   .hero img {
-    height: calc(100vh - 9rem);
+    height: 50vh;
   }
 }
 .hero .title-cta-wrapper {
@@ -11360,6 +11360,14 @@ p {
 @media (min-width: 768px) {
   .hero h2, .hero .h2 {
     font-size: 1.5rem;
+  }
+}
+@media (min-width: 992px) {
+  .hero.home img {
+    display: block;
+    margin-right: 0;
+    margin-left: auto;
+    width: auto;
   }
 }
 
@@ -11528,7 +11536,7 @@ form .form-select {
   background-color: rgba(55, 56, 58, 0.1);
 }
 
-.contacto {
+.contacto.with-margin {
   margin-top: 8rem;
 }
 .contacto h1::after, .contacto .h1::after {
@@ -11713,6 +11721,9 @@ form .form-select {
 }
 .servicio__text {
   text-align: center;
+  margin-bottom: 1rem;
+}
+.servicio__text:last-of-type {
   margin-bottom: 3rem;
 }
 .servicio .accordion-button {
@@ -11744,6 +11755,9 @@ form .form-select {
 .servicio__carousel-section .image img {
   display: block;
   width: 100%;
+  height: 400px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .card-nuestros-servicios {

@@ -1661,11 +1661,14 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var just_validate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! just-validate */ "./node_modules/just-validate/dist/just-validate.es.js");
 
-var contactoForm = document.querySelector("#contactoForm");
+
+// const contactoForm = document.querySelector("#contactoForm");
 var inputNombreApellido = document.querySelector("#inputNombreApellido");
 var inputEmail = document.querySelector("#inputEmail");
 var inputTelefono = document.querySelector("#inputTelefono");
 var inputMensaje = document.querySelector("#inputMensaje");
+var inputCompania = document.querySelector("#inputCompania");
+var inputLocalidad = document.querySelector("#inputLocalidad");
 window.addEventListener("load", function () {
   console.log("contacto init");
   var validator = new just_validate__WEBPACK_IMPORTED_MODULE_0__["default"]("#contactoForm", {
@@ -1678,7 +1681,19 @@ window.addEventListener("load", function () {
     rule: "minLength",
     value: 3,
     errorMessage: "El campo debe tener por lo menos 3 caracteres."
-  }]).addField("#inputEmail", [{
+  }])
+  // .addField("#inputCompania", [
+  //     {
+  //         rule: "required",
+  //         errorMessage: "Este campo es requerido"
+  //     },
+  //     {
+  //         rule: "minLength",
+  //         value: 3,
+  //         errorMessage: "Este campo tiene que tener como mínimo 3 caracteres."
+  //     }
+  // ])
+  .addField("#inputEmail", [{
     rule: "required",
     errorMessage: "Este campo es requerido"
   }, {
@@ -1696,9 +1711,13 @@ window.addEventListener("load", function () {
     rule: "maxLength",
     value: 10,
     errorMessage: "Este campo no puede tener mas de 10 caracteres."
-  }]).addField("#inputCotizacion", [{
+  }]).addField("#inputLocalidad", [{
     rule: "required",
-    errorMessage: "Debes seleccionar una opción"
+    errorMessage: "Este campo es requerido."
+  }, {
+    rule: "minLength",
+    value: 3,
+    errorMessage: "Este campo no puede tener menos de 3 caracteres."
   }]).addField("#inputMensaje", [{
     rule: "required",
     errorMessage: "Este campo no puede estar vacío"
@@ -1706,7 +1725,7 @@ window.addEventListener("load", function () {
     console.log("validation fail");
   }).onSuccess(function (e) {
     console.log("validation pass");
-    fetch("https://alertas-stage.herokuapp.com/api/send-email-contacto", {
+    fetch("".concat(window.location.protocol, "/api/send-email-contacto/"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -1715,7 +1734,9 @@ window.addEventListener("load", function () {
         name: inputNombreApellido.value,
         email: inputEmail.value,
         phone: inputTelefono.value,
-        message: inputMensaje.value
+        message: inputMensaje.value,
+        company: inputCompania.value,
+        state: inputLocalidad.value
       })
     }).then(function (response) {
       console.log(response.status);

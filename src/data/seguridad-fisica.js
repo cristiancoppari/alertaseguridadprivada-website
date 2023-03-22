@@ -39,12 +39,15 @@ const serviciosData = {
 
     content: {
       title: "Seguridad Física",
-      text: "El rol de la seguridad física es la protección de personas y bienes contra cualquier tipo de riesgo externo. A su vez los guardias son controlados por supervisores, para asegurar el cumplimiento de las normativas predispuestas por el contratante.",
+      text: [
+        "El rol de la vigilancia física es la de garantizar la seguridad y protección del lugar donde desempeña su trabajo y de las personas que se encuentran en él, sea empresa, edificios residenciales, obras en construcción o cualquier otra propiedad privada.",
+        "Para cumplir con sus funciones su deber es controlar los accesos en todo momento, monitorear las áreas a su alcance, cumplir las normativas como también exigir que se cumplan y dar respuesta inmediata ante cualquier situación de emergencia que pueda ocasionarse."
+      ],
 
       items: [
         {
           id: "propiedades-privadas",
-          label: "SERVICIOS DE SEGURIDAD A PROPIEDADES PRIVADAS",
+          label: "SERVICIO DE VIGILANCIA A PROPIEDADES PRIVADAS",
           text: "Brindamos seguridad física en propiedades horizontales, obras en construcción, fábricas e instituciones, entre otras.",
         },
         {
@@ -86,7 +89,7 @@ const serviciosData = {
     title: "Estamos <br>para ayudarte",
 
     text: [
-      "Comunicate con nosotros llamando a nuestro teléfono, enviando un mensaje por WhatsApp o sino, envianos tu consulta completando el formulario, para que uno de nuestros asesores se ponga en contacto"
+      "Comunicate con nosotros llamando a nuestro teléfono, enviando un mensaje por WhatsApp o envianos tu consulta completando el formulario para que uno de nuestros asesores se ponga en contacto."
     ],
 
     cta: {

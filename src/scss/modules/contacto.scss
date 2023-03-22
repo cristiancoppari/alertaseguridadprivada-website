@@ -1,11 +1,13 @@
 .contacto {
-  margin-top: $margin-top;
+    &.with-margin {
+        margin-top: $margin-top;
+    }
 
-  h1 {
-    @include title-decoration;
-  }
+    h1 {
+        @include title-decoration;
+    }
 
-  strong {
-    font-weight: 700;
-  }
+    strong {
+        font-weight: 700;
+    }
 }

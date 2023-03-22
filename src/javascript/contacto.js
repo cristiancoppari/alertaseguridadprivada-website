@@ -1,10 +1,12 @@
 import JustValidate from "just-validate";
 
-const contactoForm = document.querySelector("#contactoForm");
+// const contactoForm = document.querySelector("#contactoForm");
 const inputNombreApellido = document.querySelector("#inputNombreApellido");
 const inputEmail = document.querySelector("#inputEmail");
 const inputTelefono = document.querySelector("#inputTelefono");
 const inputMensaje = document.querySelector("#inputMensaje");
+const inputCompania = document.querySelector("#inputCompania");
+const inputLocalidad = document.querySelector("#inputLocalidad");
 
 window.addEventListener("load", () => {
     console.log("contacto init")
@@ -25,6 +27,17 @@ window.addEventListener("load", () => {
                 errorMessage: "El campo debe tener por lo menos 3 caracteres.",
             },
         ])
+        // .addField("#inputCompania", [
+        //     {
+        //         rule: "required",
+        //         errorMessage: "Este campo es requerido"
+        //     },
+        //     {
+        //         rule: "minLength",
+        //         value: 3,
+        //         errorMessage: "Este campo tiene que tener como mínimo 3 caracteres."
+        //     }
+        // ])
         .addField("#inputEmail", [
             {
                 rule: "required",
@@ -52,10 +65,15 @@ window.addEventListener("load", () => {
                 errorMessage: "Este campo no puede tener mas de 10 caracteres.",
             },
         ])
-        .addField("#inputCotizacion", [
+        .addField("#inputLocalidad", [
             {
                 rule: "required",
-                errorMessage: "Debes seleccionar una opción"
+                errorMessage: "Este campo es requerido."
+            },
+            {
+                rule: "minLength",
+                value: 3,
+                errorMessage: "Este campo no puede tener menos de 3 caracteres."
             }
         ])
         .addField("#inputMensaje", [
@@ -70,7 +88,7 @@ window.addEventListener("load", () => {
         .onSuccess((e) => {
             console.log("validation pass")
 
-            fetch("https://alertas-stage.herokuapp.com/api/send-email-contacto", {
+            fetch(`${window.location.protocol}/api/send-email-contacto/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -79,7 +97,9 @@ window.addEventListener("load", () => {
                     name: inputNombreApellido.value,
                     email: inputEmail.value,
                     phone: inputTelefono.value,
-                    message: inputMensaje.value
+                    message: inputMensaje.value,
+                    company: inputCompania.value,
+                    state: inputLocalidad.value
                 })
             })
                 .then((response) => {

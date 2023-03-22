@@ -1666,6 +1666,7 @@ var inputNombreApellido = document.querySelector("#inputNombreApellido");
 var inputEmail = document.querySelector("#inputEmail");
 var inputTelefono = document.querySelector("#inputTelefono");
 var inputCV = document.querySelector("#inputCV");
+var inputComoNosConociste = document.querySelector("#inputComoNosConociste");
 window.addEventListener("load", function () {
   console.log("rrhh init");
   var validator = new just_validate__WEBPACK_IMPORTED_MODULE_0__["default"]("#rrhhForm", {
@@ -1712,7 +1713,7 @@ window.addEventListener("load", function () {
       }
     },
     errorMessage: "Debés ingresar un archivo .pdf, .jpeg, .jpg, .doc, o .docx"
-  }]).addField("#inputCotizacion", [{
+  }]).addField("#inputComoNosConociste", [{
     rule: "required",
     errorMessage: "Debes seleccionar una opción"
   }]).onFail(function (e) {
@@ -1726,7 +1727,10 @@ window.addEventListener("load", function () {
     formData.append('email', inputEmail.value);
     formData.append('phone', inputTelefono.value);
     formData.append('file', inputCV.files[0]);
-    fetch("https://alertas-stage.herokuapp.com/api/send-email-rrhh", {
+    formData.append('howYouKnowUs', inputComoNosConociste.value);
+    console.log(inputComoNosConociste.value);
+    console.log(formData);
+    fetch("".concat(window.location.protocol, "/api/send-email-rrhh"), {
       method: "POST",
       body: formData
     }).then(function (response) {

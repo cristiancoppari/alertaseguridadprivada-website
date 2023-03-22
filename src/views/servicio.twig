@@ -15,7 +15,9 @@
     <div class="servicio__item">
       <h1>{{section1.content.title}}</h1>
 
-      <p class="servicio__text">{{section1.content.text}}</p>
+      {% for text in section1.content.text %}
+        <p class="servicio__text">{{text}}</p>
+      {% endfor %}
 
       <div class="accordion" id="accordion-alertas">
       {% for item in section1.content.items %}
@@ -35,6 +37,7 @@
       </div>
     </div>
 
+    {% if section2 %}
     <div class="servicio__carousel-section">
       <h2>{{section2.title}}</h2>
 
@@ -55,6 +58,7 @@
           </ul>
         </div>
       </section>
+    {% endif %}
       
     </div>
   </section>

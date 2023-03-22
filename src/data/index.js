@@ -47,7 +47,7 @@ const indexData = {
     image: "/images/security-guard.png",
 
     cta: {
-      link: "/contacto",
+      link: "/rrhh",
 
       label: "CONTACTANOS"
     }

@@ -9,7 +9,8 @@
         object-fit: cover;
 
         @include media-breakpoint-up(lg) {
-            height: calc(100vh - 9rem);
+            // height: calc(100vh - 9rem);
+            height: 50vh;
         }
     }
 
@@ -51,6 +52,19 @@
 
         @include media-breakpoint-up(md) {
             font-size: 1.5rem;
+        }
+    }
+
+    &.home {
+        img {
+            @include media-breakpoint-up(lg) {
+                display: block;
+
+                margin-right: 0;
+                margin-left: auto;
+
+                width: auto;
+            }
         }
     }
 }

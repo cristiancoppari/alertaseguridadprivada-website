@@ -39,7 +39,9 @@ const serviciosData = {
 
     content: {
       title: "Seguridad Electrónica",
-      text: "La Vídeo Vigilancia Permite brindar un servicio de monitoreo remoto de imágenes en tiempo real. Un sistema ágil y efectivo para controlar su negocio o propiedad desde cualquier lugar, accediendo a través del dispositivo electrónico de su preferencia.",
+      text: [
+        "La Vídeo Vigilancia Permite brindar un servicio de monitoreo remoto de imágenes en tiempo real. Un sistema ágil y efectivo para controlar su negocio o propiedad desde cualquier lugar, accediendo a través del dispositivo electrónico de su preferencia."
+      ],
 
       items: [
         {
@@ -61,28 +63,28 @@ const serviciosData = {
     }
   },
 
-  section2: {
-    title: "Nuestras Cámaras",
-    texts: [
-      "Instalamos cámaras de alta calidad.",
-      "Trabajamos con cáaras reconocidas en el mercado."
-    ],
+  // section2: {
+  //   title: "Nuestras Cámaras",
+  //   texts: [
+  //     "Instalamos cámaras de alta calidad.",
+  //     "Trabajamos con cáaras reconocidas en el mercado."
+  //   ],
 
-    carousel: {
-      id: "carousel-seguridad-fisica",
-      images: [
-        "/images/foto1-segfisica.jpg",
-        "/images/foto2-segfisica.jpg",
-        "/images/foto3-segfisica.jpg",
-      ]
-    }
-  },
+  //   carousel: {
+  //     id: "carousel-seguridad-fisica",
+  //     images: [
+  //       "/images/foto1-segfisica.jpg",
+  //       "/images/foto2-segfisica.jpg",
+  //       "/images/foto3-segfisica.jpg",
+  //     ]
+  //   }
+  // },
 
   estamosParaAyudarte: {
     title: "Estamos <br>para ayudarte",
 
     text: [
-      "Comunicate con nosotros llamando a nuestro teléfono, enviando un mensaje por WhatsApp o sino, envianos tu consulta completando el formulario, para que uno de nuestros asesores se ponga en contacto"
+      "Comunicate con nosotros llamando a nuestro teléfono, enviando un mensaje por WhatsApp o envianos tu consulta completando el formulario para que uno de nuestros asesores se ponga en contacto."
     ],
 
     cta: {

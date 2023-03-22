@@ -4,7 +4,7 @@
 
   {% include "./modules/header.twig" %}
 
-  <section class="contacto container">
+  <section class="contacto container with-margin">
     <h1>{{ contacto.title }}</h1>
 
     {% for text in contacto.body %}
@@ -24,24 +24,15 @@
         <label for="inputEmail" class="form-label">Email <span class="required">*</span></label>
         <input type="email" class="form-control" id="inputEmail" placeholder="esteban.lopez@gmail.com">
       </div>
-      <div class="col-12">
+      <div class="col-md-6">
         <label for="inputTelefono" class="form-label">Teléfono <span class="required">*</span></label>
         <input type="text" class="form-control" id="inputTelefono" placeholder="Ej: 1155556666">
       </div>
       <div class="col-md-6">
-        <label for="inputLocalidad" class="form-label">Localidad</label>
+        <label for="inputLocalidad" class="form-label">Localidad <span class="required">*</span> </label>
         <input type="text" class="form-control" id="inputLocalidad" placeholder="Ej: Capital Federal">
       </div>
-      <div class="col-md-6">
-        <label for="inputCotizacion" class="form-label">Cotización</label>
-        <select class="form-select" id="inputCotizacion">
-          {# <option selected>Cotización</option> #}
-          <option value="Opcion 1">Opción 1</option>
-          <option value="Opcion 2">Opción 2</option>
-          <option value="Opcion 3">Opción 3</option>
-        </select>
-      </div>
-      <div class="col-12">
+      <div class="col-md-12">
         <label for="inputMensaje" class="form-label">Mensaje <span class="required">*</span></label>
         <textarea class="form-control" id="inputMensaje" rows="3"></textarea>
       </div>

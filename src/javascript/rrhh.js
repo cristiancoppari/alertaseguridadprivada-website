@@ -5,6 +5,7 @@ const inputNombreApellido = document.querySelector("#inputNombreApellido");
 const inputEmail = document.querySelector("#inputEmail");
 const inputTelefono = document.querySelector("#inputTelefono");
 const inputCV = document.querySelector("#inputCV");
+const inputComoNosConociste = document.querySelector("#inputComoNosConociste")
 
 window.addEventListener("load", () => {
     console.log("rrhh init")
@@ -73,7 +74,7 @@ window.addEventListener("load", () => {
                 errorMessage: "Debés ingresar un archivo .pdf, .jpeg, .jpg, .doc, o .docx"
             }
         ])
-        .addField("#inputCotizacion", [
+        .addField("#inputComoNosConociste", [
             {
                 rule: "required",
                 errorMessage: "Debes seleccionar una opción"
@@ -89,8 +90,12 @@ window.addEventListener("load", () => {
             formData.append('email', inputEmail.value);
             formData.append('phone', inputTelefono.value);
             formData.append('file', inputCV.files[0]);
+            formData.append('howYouKnowUs', inputComoNosConociste.value)
+            console.log(inputComoNosConociste.value)
 
-            fetch("https://alertas-stage.herokuapp.com/api/send-email-rrhh", {
+            console.log(formData)
+
+            fetch(`${window.location.protocol}/api/send-email-rrhh`, {
                 method: "POST",
                 body: formData
             })
