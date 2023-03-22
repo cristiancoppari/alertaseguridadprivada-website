@@ -57,5 +57,23 @@ p {
     font-weight: 300;
     color: $gray;
 
-    letter-spacing: 1px;
+    letter-spacing: 1.2px;
+}
+
+.btn-whatsapp {
+    position: fixed;
+
+    border: none;
+    background: none;
+
+    bottom: 5%;
+    right: 5%;
+
+    img {
+        width: 5rem;
+    }
+}
+
+a {
+    letter-spacing: 1.4px;
 }
