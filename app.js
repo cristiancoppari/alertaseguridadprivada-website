@@ -7,6 +7,7 @@ var logger = require('morgan');
 // let helmet = require('helmet');
 var indexRouter = require('./src/routes/index');
 var apiRouter = require('./src/routes/api');
+const enforce = require('express-sslify');
 
 var app = express();
 
@@ -33,6 +34,11 @@ app.set('view engine', 'twig');
 //     },
 //   },
 // }));
+
+if (app.get("env") !== "development") {
+  app.use(enforce.HTTPS({ trustProtoHeader: true }));
+}
+
 
 app.use(logger('dev'));
 app.use(express.json());
