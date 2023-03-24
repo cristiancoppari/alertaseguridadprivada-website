@@ -14,7 +14,7 @@ const indexData = {
     classes: "home",
 
     image: {
-      mobile: "/images/hero-home.webp",
+      mobile: "/images/hero-home-mobile.webp",
       tablet: "/images/hero-home.webp",
       desktop: "/images/hero-home.webp",
       desktopXL: "/images/hero-home.webp",
