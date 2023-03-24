@@ -47,7 +47,7 @@ const indexData = {
     image: "/images/security-guard.webp",
 
     cta: {
-      link: "/rrhh",
+      link: "/contacto",
 
       label: "CONTACTANOS"
     }

@@ -32,7 +32,7 @@ const serviciosData = {
     subtitle: "SERVICIOS A MEDIDA",
 
     texts: [
-      "Partiendo de un detallado análisis de los potenciales riesgos de nuestros clientes y/o prospectos, diseñamos una estrategía a medida de lo requerido por ellos y sus reales necesidades, logrando de esta manera un resultado más eficaz en la gestión de seguridad. Para tal fin, nuestra oferta de servicios se desarrollan mediante la combinación de los siguientes factores: vigilancia presencial, rondas internas/perimetrales, supervisores en horarios de turnos, protección de bienes y control de accesos.",
+      "Partiendo de un detallado análisis de los potenciales riesgos de nuestros clientes, diseñamos una estrategía a medida de lo requerido por ellos y sus reales necesidades, logrando de esta manera un resultado más eficaz en la gestión de seguridad. Para tal fin, nuestra oferta de servicios se desarrollan mediante la combinación de los siguientes factores: vigilancia presencial, rondas internas/perimetrales, supervisores en horarios de turnos, protección de bienes y control de accesos.",
       "Además, el aporte de nuestra tecnología en los puestos de vigilancia ortorga un mayor rendimiento de nuestros guardias para desempeñar sus tareas."
     ],
 

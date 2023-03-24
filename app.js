@@ -35,9 +35,9 @@ app.set('view engine', 'twig');
 //   },
 // }));
 
-if (app.get("env") !== "development") {
-  app.use(enforce.HTTPS({ trustProtoHeader: true }));
-}
+// if (app.get("env") !== "development") {
+//   app.use(enforce.HTTPS({ trustProtoHeader: true }));
+// }
 
 
 app.use(logger('dev'));
