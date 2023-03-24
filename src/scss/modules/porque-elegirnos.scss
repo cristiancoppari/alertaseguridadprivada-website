@@ -1,52 +1,52 @@
 .porque-elegirnos {
-  background-image: url("/images/background-blue.png");
-  background-repeat: repeat;
-  background-position: center;
-  background-size: cover;
+    background-image: url("/images/background-blue.webp");
+    background-repeat: repeat;
+    background-position: center;
+    background-size: cover;
 
-  h2 {
-    color: $white;
+    h2 {
+        color: $white;
 
-    text-align: center;
+        text-align: center;
 
-    margin-bottom: 4rem;
-  }
-
-  .alertas-card {
-    position: relative;
-
-    width: 300px;
-
-    border: 2px $white solid;
-    border-radius: 1rem;
-
-    margin-bottom: 3rem;
-
-    margin-right: auto;
-    margin-left: auto;
-
-    padding: 3rem;
-
-    text-align: center;
-
-    .icon-wrapper {
-      position: absolute;
-      display: block;
-      width: 3rem;
-      padding: 0.5rem;
-
-      top: -24px;
-      left: 50%;
-
-      transform: translateX(-50%);
-
-      border-radius: 10rem;
-      background-color: $white;
+        margin-bottom: 4rem;
     }
 
-    p {
-      color: $white;
-      margin: 0;
+    .alertas-card {
+        position: relative;
+
+        width: 300px;
+
+        border: 2px $white solid;
+        border-radius: 1rem;
+
+        margin-bottom: 3rem;
+
+        margin-right: auto;
+        margin-left: auto;
+
+        padding: 3rem;
+
+        text-align: center;
+
+        .icon-wrapper {
+            position: absolute;
+            display: block;
+            width: 3rem;
+            padding: 0.5rem;
+
+            top: -24px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            border-radius: 10rem;
+            background-color: $white;
+        }
+
+        p {
+            color: $white;
+            margin: 0;
+        }
     }
-  }
 }

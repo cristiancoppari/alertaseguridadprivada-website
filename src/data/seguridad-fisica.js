@@ -11,10 +11,10 @@ const serviciosData = {
 
   hero: {
     image: {
-      mobile: "/images/hero-segfisica-mobile.jpg",
-      tablet: "/images/hero-segfisica-mobile.jpg",
-      desktop: "/images/hero-segfisica-desktop.jpg",
-      desktopXL: "/images/hero-segfisica-desktopxl.jpg",
+      mobile: "/images/hero-segfisica-mobile.webp",
+      tablet: "/images/hero-segfisica-mobile.webp",
+      desktop: "/images/hero-segfisica-desktop.webp",
+      desktopXL: "/images/hero-segfisica-desktopxl.webp",
     },
   },
 
@@ -78,9 +78,9 @@ const serviciosData = {
     carousel: {
       id: "carousel-seguridad-fisica",
       images: [
-        "/images/foto1-segfisica.jpg",
-        "/images/foto2-segfisica.jpg",
-        "/images/foto3-segfisica.jpg",
+        "/images/foto1-segfisica.webp",
+        "/images/foto2-segfisica.webp",
+        "/images/foto3-segfisica.webp",
       ]
     }
   },

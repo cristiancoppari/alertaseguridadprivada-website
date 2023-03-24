@@ -20,10 +20,10 @@ const indexData = {
 
   hero: {
     image: {
-      mobile: "/images/hero-rrhh-mobile.jpg",
-      tablet: "/images/hero-rrhh-mobile.jpg",
-      desktop: "/images/hero-rrhh-desktop.jpg",
-      desktopXL: "/images/hero-rrhh-desktopxl.jpg",
+      mobile: "/images/hero-rrhh-mobile.webp",
+      tablet: "/images/hero-rrhh-mobile.webp",
+      desktop: "/images/hero-rrhh-desktop.webp",
+      desktopXL: "/images/hero-rrhh-desktopxl.webp",
     },
   },
 }

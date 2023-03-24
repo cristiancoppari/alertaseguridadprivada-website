@@ -13,7 +13,7 @@ const headerData = {
   ],
 
   logo: {
-    img: "/images/logo-alertas.png",
+    img: "/images/logo-alertas.webp",
     altText: "Alertas Seguridad Privada",
     link: "/"
   },

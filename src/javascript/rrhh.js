@@ -71,7 +71,7 @@ window.addEventListener("load", () => {
                         extensions: ["pdf", "jpeg", "jpg", "png", "doc", "docx"]
                     }
                 },
-                errorMessage: "Debés ingresar un archivo .pdf, .jpeg, .jpg, .doc, o .docx"
+                errorMessage: "Debés ingresar un archivo .pdf, .jpeg, .webp, .doc, o .docx"
             }
         ])
         .addField("#inputComoNosConociste", [

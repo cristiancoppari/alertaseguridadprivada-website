@@ -9,10 +9,10 @@ const indexData = {
 
   hero: {
     image: {
-      mobile: "/images/hero-nosotros-mobile.jpg",
-      tablet: "/images/hero-nosotros-mobile.jpg",
-      desktop: "/images/hero-nosotros-desktop.jpg",
-      desktopXL: "/images/hero-nosotros-desktopxl.jpg",
+      mobile: "/images/hero-nosotros-mobile.webp",
+      tablet: "/images/hero-nosotros-mobile.webp",
+      desktop: "/images/hero-nosotros-desktop.webp",
+      desktopXL: "/images/hero-nosotros-desktopxl.webp",
     },
   },
 
@@ -34,7 +34,7 @@ const indexData = {
   nuestroEquipo: {
     title: "Nuestro equipo",
 
-    image: "/images/services.png",
+    image: "/images/services.webp",
 
     text: [
       "Capacitamos a nuestro personal de vigilancia mediante el entrenamiento constante y los cursos requeridos para poder cumplir con sus tareas con mayor eficacia.",
@@ -49,7 +49,7 @@ const indexData = {
       "Podes comunicarte con nosotros llamando a nuestras líneas telefónicas, enviándonos un WhatsApp o completando el formulario para que uno de nuestros asesores se ponga en contacto."
     ],
 
-    image: "/images/security-guard.png",
+    image: "/images/security-guard.webp",
 
     cta: {
       link: "/contacto",

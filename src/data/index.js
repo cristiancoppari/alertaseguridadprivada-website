@@ -14,10 +14,10 @@ const indexData = {
     classes: "home",
 
     image: {
-      mobile: "/images/hero-home.png",
-      tablet: "/images/hero-home.png",
-      desktop: "/images/hero-home.png",
-      desktopXL: "/images/hero-home.png",
+      mobile: "/images/hero-home.webp",
+      tablet: "/images/hero-home.webp",
+      desktop: "/images/hero-home.webp",
+      desktopXL: "/images/hero-home.webp",
     },
 
     cta: {
@@ -34,7 +34,7 @@ const indexData = {
       "Alertas Seguridad Privada. Experiencia responsabilidad y confiabilidad, puesta al servicio de su seguridad."
     ],
 
-    image: "/images/services.png"
+    image: "/images/services.webp"
   },
 
   estamosParaAyudarte: {
@@ -44,7 +44,7 @@ const indexData = {
       "Podes comunicarte con nosotros llamando a nuestras líneas telefónicas, enviándonos un WhatsApp o completando el formulario para que uno de nuestros asesores se ponga en contacto."
     ],
 
-    image: "/images/security-guard.png",
+    image: "/images/security-guard.webp",
 
     cta: {
       link: "/rrhh",

@@ -13,10 +13,10 @@ const serviciosData = {
     classes: "servicios",
 
     image: {
-      mobile: "/images/hero-servicios-mobile.jpg",
-      tablet: "/images/hero-servicios-mobile.jpg",
-      desktop: "/images/hero-servicios-desktop.jpg",
-      desktopXL: "/images/hero-servicios-desktopxl.jpg",
+      mobile: "/images/hero-servicios-mobile.webp",
+      tablet: "/images/hero-servicios-mobile.webp",
+      desktop: "/images/hero-servicios-desktop.webp",
+      desktopXL: "/images/hero-servicios-desktopxl.webp",
     },
 
     // cta: {
